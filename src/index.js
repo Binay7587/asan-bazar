@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 
+import HomePageLayout from './pages/layout/home-page.layout';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    Hello World
+    <HomePageLayout name="Binaya Karki" address="Bhaktapur" />
   </React.StrictMode>
 );
 

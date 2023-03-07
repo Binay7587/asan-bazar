@@ -1,7 +1,69 @@
-# Getting Started with Create React App
+# Learning Mern Stack Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Reactjs => Client side render (CSR)
+Nextjs => Server side render (SSR) => SEO friendly
 
+## Directory Structure
+
+```bash
+├── node_modules
+├── public
+│   ├── favicon.ico
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── robots.txt
+├── src
+│   ├── pages
+│   ├──   ├── home
+│   ├──   │    ├── Home.js
+│   ├──   │    └── Home.module.css
+│   ├──   ├── login
+│   ├──   │    ├── Login.js
+│   ├──   │    └── Login.module.css
+│   ├──   ├── register
+│   ├──   │    ├── Register.js
+│   ├──   │    └── Register.module.css
+│   ├──   └── layout
+│   ├──        ├── Layout.js
+│   ├──        └── Layout.module.css
+│   ├── components
+│   ├──       ├── Button
+│   ├──       │      ├── Button.js
+│   ├──       │      └── Button.module.css
+│   ├──       ├── Card
+│   ├──              ├── Card.js
+│   ├──              └── Card.module.css
+│   ├── services
+│   ├──       ├── to call api
+│   ├── config
+│   ├──       ├── to store config
+│   ├── assets
+│   ├──       ├── to store css/js/images
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+```
+
+## Components
+    - an UI block element that can be reused
+    - There are two types of components
+        - Stateful / Class Component
+        - Stateless / Functional Component
+
+## State V/S Props
+### State
+    - are the internal data of a component
+    - can be changed/manipulated
+    - State can be changed by the component itself and is present only in class components
+### Props
+    - are the incoming data to a component
+    - readonly only
+    - Props can be passed from one component to another 
 ## Available Scripts
 
 In the project directory, you can run:
