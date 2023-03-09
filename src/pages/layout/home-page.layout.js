@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const HomePageLayout = (props) => {
     //UseState is a hook which is used to manage state in functional component
     let [counter, setCounter] = useState(0);
+    let [liked, setLiked] = useState(false);
 
     // UseEffect is a hook which is used to manage lifecycle methods in functional component
     useEffect(() => {
@@ -15,9 +16,17 @@ const HomePageLayout = (props) => {
         }
     }, [counter]);
 
+    useEffect(() => {
+
+    }, [liked]);
+
     const counterIncrement = (e) => {
         setCounter(++counter);
         console.log(counter);
+    }
+
+    const likedProcess = (e) => {
+        setLiked(!liked);
     }
 
     return (
@@ -28,6 +37,7 @@ const HomePageLayout = (props) => {
                 <p>{props.address}</p>
                 <p>{counter}</p>
                 <button onClick={counterIncrement}>Click Me</button>
+                <button onClick={likedProcess}>{liked ? 'Liked' : 'Like'}</button>
             </div>
         </div>
     );

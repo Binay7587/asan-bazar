@@ -64,6 +64,36 @@ Nextjs => Server side render (SSR) => SEO friendly
     - are the incoming data to a component
     - readonly only
     - Props can be passed from one component to another 
+  
+### React Hooks
+    - useState
+    - useEffect
+    - useContext
+    - useReducer
+    - useCallback
+    - useMemo
+    - useRef
+    - useImperativeHandle
+    - useLayoutEffect
+    - useDebugValue
+
+## React LifeCycle
+    - Mounting -> Creating the component
+        - constructor
+        - getDerivedStateFromProps
+        - render
+        - componentDidMount
+            - if there are any state/props change then, it will update
+    - Updating -> Changing the state of the component
+        - getDerivedStateFromProps
+        - render
+        - shouldComponentUpdate
+        - componentDidUpdate
+            - if there are any state change then, it will re-render the component
+        - getSnapShotBeforeUpdate
+    - Unmounting -> Destroying the component from the DOM
+        - componentWillUnmount
+
 ## Available Scripts
 
 In the project directory, you can run:
