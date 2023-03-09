@@ -1,77 +1,51 @@
-import { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
+import "../../assets/css/main.css"
+import logo from '../../assets/images/logo.svg';
+import { FaShoppingCart } from 'react-icons/fa';
 
-// Functional Component
-const HomePageLayout = (props) => {
-    //UseState is a hook which is used to manage state in functional component
-    let [counter, setCounter] = useState(0);
-    let [liked, setLiked] = useState(false);
-
-    // UseEffect is a hook which is used to manage lifecycle methods in functional component
-    useEffect(() => {
-        // componentDidMount
-        console.log('HomePageLayout: componentDidMount');
-        return () => {
-            // componentWillUnmount
-            console.log('HomePageLayout: componentWillUnmount');
-        }
-    }, [counter]);
-
-    useEffect(() => {
-
-    }, [liked]);
-
-    const counterIncrement = (e) => {
-        setCounter(++counter);
-        console.log(counter);
-    }
-
-    const likedProcess = (e) => {
-        setLiked(!liked);
-    }
-
-    return (
-        <div>
-            <div className="container">
-                I'm from functional component.
-                <p>{props.name}</p>
-                <p>{props.address}</p>
-                <p>{counter}</p>
-                <button onClick={counterIncrement}>Click Me</button>
-                <button onClick={likedProcess}>{liked ? 'Liked' : 'Like'}</button>
-            </div>
-        </div>
-    );
+const HomePageLayout = () => {
+    return (<>
+        <Navbar bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand href="#logo">
+                    <img
+                        src={logo}
+                        width="50"
+                        height="50"
+                        className="d-inline-block align-top circle"
+                        alt="React logo"
+                    />
+                </Navbar.Brand>
+                <Nav className="me-auto">
+                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#categories">Categories</Nav.Link>
+                    <Nav.Link href="#brands">Brands</Nav.Link>
+                    <Nav.Link href="#products">Products</Nav.Link>
+                </Nav>
+                <Form className="d-flex">
+                    <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        size="sm"
+                    />
+                </Form>
+                <Nav>
+                    <Nav.Link href="#cart">
+                        <FaShoppingCart size={20} />
+                    </Nav.Link>
+                    <Nav.Link href="#login">
+                        Login
+                    </Nav.Link>
+                    <Nav.Link href="#register">
+                        Register
+                    </Nav.Link>
+                </Nav>
+            </Container>
+        </Navbar>
+    </>);
 }
-
-// Class Component
-// import React, { Component } from 'react';
-
-// class HomePageLayout extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             phone: '984-1234567'
-//         }
-//     }
-
-//     render = () => {
-//         console.log('HomePageLayout: render');
-//         this.setState({
-//             phone: '984-1234567'
-//         }) // This will not cause re-render
-//         // if component is changed then this will cause component re-render
-//         // Component can go into infinite loop if we don't use it properly
-//         return (
-//             <div>
-//                 <div className="container">
-//                     I'm from Class component.
-//                     <p>{this.props.name}</p>
-//                     <p>{this.props.address}</p>
-//                     <p>{this.state.phone}</p>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
 
 export default HomePageLayout;
