@@ -17,11 +17,9 @@ import brand3 from '../../assets/images/brands/brand3.jpg';
 import brand4 from '../../assets/images/brands/brand4.png';
 import brand5 from '../../assets/images/brands/brand5.png';
 import brand6 from '../../assets/images/brands/brand6.jpg';
-import brand7 from '../../assets/images/brands/brand7.png';
 
-import starGrey from '../../assets/images/star-grey.png';
-import starYellow from '../../assets/images/star-yellow.png';
 import HomeMenu from "../home/components/menu.component";
+import { NavLink } from "react-router-dom";
 
 const HomePageLayout = () => {
     const settings = {
@@ -63,32 +61,44 @@ const HomePageLayout = () => {
             <Row className="my-3">
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand1} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand1} />
+                        </NavLink>
                     </Card>
                 </Col>
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand2} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand2} />
+                        </NavLink>
                     </Card>
                 </Col>
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand3} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand3} />
+                        </NavLink>
                     </Card>
                 </Col>
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand4} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand4} />
+                        </NavLink>
                     </Card>
                 </Col>
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand5} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand5} />
+                        </NavLink>
                     </Card>
                 </Col>
                 <Col sm={12} md={6} lg={2}>
                     <Card>
-                        <Card.Img variant="top" src={brand6} />
+                        <NavLink to="/brands/apple">
+                            <Card.Img variant="top" src={brand6} />
+                        </NavLink>
                     </Card>
                 </Col>
             </Row>
