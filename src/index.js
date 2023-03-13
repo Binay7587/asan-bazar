@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import "./assets/css/main.css"
 
-import HomePageLayout from './pages/layout/home-page.layout';
+import Routing from './routes/routing';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <HomePageLayout name="Binaya Karki" address="Bhaktapur" />
+    <Routing />
   </React.StrictMode>
 );
 
