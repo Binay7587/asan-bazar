@@ -10,7 +10,7 @@ import banner2 from '../../assets/images/banners/banner2.jpg';
 import banner3 from '../../assets/images/banners/banner3.jpg';
 import banner4 from '../../assets/images/banners/banner4.jpg';
 
-import brand1 from '../../assets/images/brands/brand1.jpg';
+import brand1 from '../../assets/images/brands/brand1.png';
 import brand2 from '../../assets/images/brands/brand2.png';
 import brand3 from '../../assets/images/brands/brand3.jpg';
 import brand4 from '../../assets/images/brands/brand4.png';

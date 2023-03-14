@@ -2,7 +2,7 @@ import { Col, Container, Navbar, Row } from "react-bootstrap"
 
 const FooterComponent = () => {
     return (<>
-        <footer className="bg-dark fixed-bottom">
+        <footer className="bg-dark mt-5">
             <Container style={{ minHeight: "15vh" }}>
                 <Row>
                     <Col sm={12} md={4} className="text-white">

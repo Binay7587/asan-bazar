@@ -1,7 +1,7 @@
 import { Col, Button, Card, Badge } from "react-bootstrap";
 import Rating from "react-rating";
 
-import brand1 from '../../assets/images/brands/brand1.jpg';
+import brand1 from '../../assets/images/brands/brand1.png';
 import starGrey from '../../assets/images/star-grey.png';
 import starYellow from '../../assets/images/star-yellow.png';
 

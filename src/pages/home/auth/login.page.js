@@ -1,43 +1,66 @@
-import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Card, Container, Form, Row } from "react-bootstrap";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import "./auth.css";
 
 const LoginPage = () => {
-    let [data, setData] = useState({});
+    let loginSchema = Yup.object().shape({
+        email: Yup.string().email("Invalid email").required("Email is required"),
+        password: Yup.string().required("Password is required"),
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form submitted");
-        console.log(data);
-    }
+    const formik = useFormik({
+        initialValues: {
+            email: null,
+            password: null,
+        },
+        validationSchema: loginSchema,
+        onSubmit: (values) => {
+            console.log(values);
+            // TODO: Login API
+            // TODO: Redirect to dashboard
+        }
+    });
 
     return (<>
         <Container>
             <Row className="justify-content-center">
                 <Col lg={5} className="mt-5">
-                    <h4 className="text-center">Login</h4>
-                    <Form onSubmit={handleSubmit} className="mt-5">
-                        <Form.Group className="mb-3">
-                            <Form.Label>Email:</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" onChange={(e) => {
-                                setData({ ...data, email: e.target.value });
-                            }} />
-                            <span className="text-danger"></span>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" onChange={(e) => {
-                                setData({ ...data, password: e.target.value });
-                            }} />
-                            <span className="text-danger"></span>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Check type="checkbox" label="Remember me" />
-                        </Form.Group>
-                        <Button variant="primary" type="submit" className="w-100">
-                            Login
-                        </Button>
-                    </Form>
+                    <Card className="p-4">
+                        <h4 className="text-center">Login</h4>
+                        <Form onSubmit={formik.handleSubmit} className="mt-5">
+                            <Form.Group className="mb-3">
+                                <Form.Label>Email:</Form.Label>
+                                <Form.Control
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter email"
+                                    onChange={formik.handleChange}
+                                />
+                                <span className="text-danger">{formik.errors.email}</span>
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Password:</Form.Label>
+                                <Form.Control
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    onChange={formik.handleChange}
+                                />
+                                <span className="text-danger">{formik.errors.password}</span>
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Check
+                                    name="rememberme"
+                                    type="checkbox"
+                                    label="Remember me"
+                                />
+                            </Form.Group>
+                            <Button variant="primary" type="submit" className="w-100">
+                                Login
+                            </Button>
+                        </Form>
+                    </Card>
                 </Col>
             </Row>
         </Container>
