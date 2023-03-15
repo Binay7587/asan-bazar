@@ -21,6 +21,7 @@ import { NavLink } from "react-router-dom";
 const HomePage = () => {
     const settings = {
         autoplay: true,
+        autoplaySpeed: 4000,
         dots: true,
         infinite: false,
         speed: 500,
