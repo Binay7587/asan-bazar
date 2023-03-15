@@ -1,16 +1,18 @@
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./auth.css";
 
+import noImage from "../../../assets/images/no-image.jpg";
+
 const RegisterPage = () => {
-    let registerSchema = Yup.object().shape({
-        name: Yup.string().required("Fullname is required"),
+    let registerSchema = Yup.object({
+        name: Yup.string().required("Fullname is required").min(5).max(30),
         email: Yup.string().email("Invalid email").required("Email is required"),
-        password: Yup.string().required("Password is required").oneOf([Yup.ref("confirmPassword"), null], "Passwords must match"),
-        role: Yup.string().required("Role is required"),
-        address: Yup.object().shape({
-            temp: Yup.object().shape({
+        password: Yup.string().matches('^[a-zA-Z0-9]{3,30}$', 'Password should contain at least one uppercase, one lowercase, one unique character, and one number').oneOf([Yup.ref("confirmPassword"), null], "Passwords must match").required("Password is required"),
+        role: Yup.string().required("Role is required").default("customer"),
+        address: Yup.object({
+            temp: Yup.object({
                 state: Yup.string().required("State is required"),
                 district: Yup.string().required("District is required"),
                 municipality: Yup.string().required("Municipality is required"),
@@ -18,7 +20,7 @@ const RegisterPage = () => {
                 houseNumber: Yup.string().required("House number is required"),
                 postcode: Yup.string().required("Postcode is required"),
             }),
-            perm: Yup.object().shape({
+            perm: Yup.object({
                 state: Yup.string().required("State is required"),
                 district: Yup.string().required("District is required"),
                 municipality: Yup.string().required("Municipality is required"),
@@ -30,6 +32,7 @@ const RegisterPage = () => {
         phone: Yup.string().required("Phone number is required"),
         userImage: Yup.string().required("User image is required"),
     });
+
     const formik = useFormik({
         initialValues: {
             name: null,
@@ -61,6 +64,19 @@ const RegisterPage = () => {
         validationSchema: registerSchema,
         onSubmit: (values) => {
             console.log(values);
+            values.address = JSON.stringify(values.address);
+            // FormData
+            let formData = new FormData();
+            if (values.userImage) {
+                formData.append("userImage", values.userImage, values.userImage.name);
+                delete values.userImage;
+            }
+            /*formData.append('name', values.name);
+            formData.append('email', values.email);
+            formData.append('password', values.password);*/
+
+            (Object.keys(values)).map((key) => formData.append(key, values[key]));
+
             // TODO: Register API
             // TODO: Redirect to dashboard
         }
@@ -132,7 +148,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.state}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -152,7 +168,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.district}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -172,7 +188,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.municipality}</span>
                                         </Col>
                                     </Row>
                                     <Row className="mt-2">
@@ -194,7 +210,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.street}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -214,7 +230,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.houseNumber}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -234,7 +250,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.temp?.postcode}</span>
                                         </Col>
                                     </Row>
                                 </Form.Group>
@@ -261,7 +277,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.state}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -281,7 +297,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.district}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -301,7 +317,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.municipality}</span>
                                         </Col>
                                     </Row>
                                     <Row className="mt-2">
@@ -323,7 +339,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.street}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -343,7 +359,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.houseNumber}</span>
                                         </Col>
                                         <Col>
                                             <Form.Control
@@ -363,7 +379,7 @@ const RegisterPage = () => {
                                                     })
                                                 }}
                                             />
-                                            <span className="text-danger">{formik.errors.name}</span>
+                                            <span className="text-danger">{formik.errors.address?.perm?.postcode}</span>
                                         </Col>
                                     </Row>
                                 </Form.Group>
@@ -396,14 +412,26 @@ const RegisterPage = () => {
                                 </Form.Group>
                             </Row>
                             <Row>
-                                <Form.Group as={Col} className="mb-3">
+                                <Form.Group as={Col} className="mb-3 col-6">
                                     <Form.Label>Image:</Form.Label>
                                     <Form.Control
                                         name="userImage"
                                         type="file"
                                         size="sm"
+                                        onChange={(e) => {
+                                            formik.setValues({
+                                                ...formik.values,
+                                                //single file
+                                                userImage: e.target.files[0]
+                                            })
+                                        }}
                                     />
                                     <span className="text-danger">{formik.errors.userImage}</span>
+                                </Form.Group>
+                                <Form.Group as={Col} className="mb-3 col-2">
+                                    {
+                                        formik.values.userImage ? <Image src={URL.createObjectURL(formik.values.userImage)} alt="user-image" fluid /> : <Image src={noImage} alt="no-image" fluid />
+                                    }
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -428,9 +456,6 @@ const RegisterPage = () => {
                                 </Form.Group>
                             </Row>
                             <Row>
-                                <Form.Group className="mb-3">
-                                    <Form.Check type="checkbox" label="Remember me" />
-                                </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Button variant="primary" type="submit" className="w-100">
                                         Register
