@@ -8,8 +8,12 @@ import BrandDetail from '../pages/home/brand/brand-detail.page';
 import HomePage from '../pages/home/home.page';
 import HomePageLayout from '../pages/layout/home-page.layout';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Routing = () => {
     return (<>
+        <ToastContainer />
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePageLayout />}>

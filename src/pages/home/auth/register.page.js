@@ -6,11 +6,14 @@ import "./auth.css";
 
 import noImage from "../../../assets/images/no-image.jpg";
 import ActionButton from "../../../components/common/action-btn.component";
-import { useState } from "react";
-import axiosInstance from "../../../services/axios.service";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import authService from "./auth.service";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const userImageRef = useRef();
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -46,62 +49,53 @@ const RegisterPage = () => {
         userImage: Yup.string().required("User image is required"),
     });
 
+    let navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
-            name: null,
-            email: null,
-            password: null,
-            role: null,
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            role: '',
             address: {
                 temp: {
-                    state: null,
-                    district: null,
-                    municipality: null,
-                    street: null,
-                    houseNumber: null,
-                    postcode: null,
+                    state: '',
+                    district: '',
+                    municipality: '',
+                    street: '',
+                    houseNumber: '',
+                    postcode: '',
                 },
                 perm: {
-                    state: null,
-                    district: null,
-                    municipality: null,
-                    street: null,
-                    houseNumber: null,
-                    postcode: null,
+                    state: '',
+                    district: '',
+                    municipality: '',
+                    street: '',
+                    houseNumber: '',
+                    postcode: '',
                 }
             },
-            phone: null,
-            userImage: null,
+            phone: '',
+            userImage: "",
             status: "inactive",
         },
         validationSchema: registerSchema,
-        onSubmit: async (values) => {
+        onSubmit: async (values, { resetForm }) => {
             try {
                 let finalSubmission = { ...values };
                 finalSubmission.address = JSON.stringify(values.address);
-                // FormData
-                let formData = new FormData();
-                if (finalSubmission.userImage) {
-                    formData.append("userImage", finalSubmission.userImage, finalSubmission.userImage.name);
-                    delete finalSubmission.userImage;
-                }
-                /*formData.append('name', finalSubmission.name);
-                formData.append('email', finalSubmission.email);
-                formData.append('password', finalSubmission.password);*/
 
-                (Object.keys(finalSubmission)).map((key) => formData.append(key, finalSubmission[key]));
+                let response = await authService.registerUser(finalSubmission);
 
-                let response = await axiosInstance.post("api/v1/register", formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                });
-
-                console.log(response);
-                // TODO: Redirect to dashboard
+                navigate("/login");
+                toast.success(response.msg);
+                // Navigating resets the form. No need to call resetForm()
+                resetForm();
+                userImageRef.current.value = "";
             }
             catch (error) {
-                console.log(error);
+                toast.error(error.data.msg);
             }
         }
     });
@@ -136,6 +130,7 @@ const RegisterPage = () => {
                                         type="text"
                                         placeholder="Enter your fullname"
                                         onChange={formik.handleChange}
+                                        value={formik.values.name}
                                     />
                                     <span className="text-danger">{formik.errors.name}</span>
                                 </Form.Group>
@@ -146,6 +141,7 @@ const RegisterPage = () => {
                                         type="email"
                                         placeholder="Enter your email"
                                         onChange={formik.handleChange}
+                                        value={formik.values.email}
                                     />
                                     <span className="text-danger">{formik.errors.email}</span>
                                 </Form.Group>
@@ -171,6 +167,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.state}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.state}</span>
                                         </Col>
@@ -191,6 +188,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.district}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.district}</span>
                                         </Col>
@@ -211,6 +209,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.municipality}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.municipality}</span>
                                         </Col>
@@ -233,6 +232,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.street}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.street}</span>
                                         </Col>
@@ -253,6 +253,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.houseNumber}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.houseNumber}</span>
                                         </Col>
@@ -273,6 +274,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.temp.postcode}
                                             />
                                             <span className="text-danger">{formik.errors.address?.temp?.postcode}</span>
                                         </Col>
@@ -300,6 +302,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.state}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.state}</span>
                                         </Col>
@@ -320,6 +323,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.district}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.district}</span>
                                         </Col>
@@ -340,6 +344,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.municipality}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.municipality}</span>
                                         </Col>
@@ -362,6 +367,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.street}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.street}</span>
                                         </Col>
@@ -382,6 +388,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.houseNumber}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.houseNumber}</span>
                                         </Col>
@@ -402,6 +409,7 @@ const RegisterPage = () => {
                                                         }
                                                     })
                                                 }}
+                                                value={formik.values.address.perm.postcode}
                                             />
                                             <span className="text-danger">{formik.errors.address?.perm?.postcode}</span>
                                         </Col>
@@ -416,6 +424,7 @@ const RegisterPage = () => {
                                         type="tel"
                                         placeholder="Enter your phone number"
                                         onChange={formik.handleChange}
+                                        value={formik.values.phone}
                                     />
                                     <span className="text-danger">{formik.errors.phone}</span>
                                 </Form.Group>
@@ -427,6 +436,7 @@ const RegisterPage = () => {
                                         placeholder="Enter your role"
                                         size="sm"
                                         onChange={formik.handleChange}
+                                        value={formik.values.role}
                                     >
                                         <option>-- Select Any Role --</option>
                                         <option value={"seller"}>Seller</option>
@@ -442,6 +452,7 @@ const RegisterPage = () => {
                                         name="userImage"
                                         type="file"
                                         size="sm"
+                                        ref={userImageRef}
                                         onChange={(e) => {
                                             formik.setValues({
                                                 ...formik.values,
@@ -467,6 +478,7 @@ const RegisterPage = () => {
                                             type={showPassword ? 'text' : 'password'}
                                             placeholder="Enter password"
                                             onChange={formik.handleChange}
+                                            value={formik.values.password}
                                         />
                                         <button
                                             className="btn btn-outline-secondary"
@@ -487,6 +499,7 @@ const RegisterPage = () => {
                                         type={showPassword ? 'text' : 'password'}
                                         placeholder="Enter confirm password"
                                         onChange={formik.handleChange}
+                                        value={formik.values.confirmPassword}
                                     />
                                 </Form.Group>
                             </Row>
