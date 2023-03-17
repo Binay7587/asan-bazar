@@ -1,7 +1,8 @@
-import { Button, Col, Card, Container, Form, Row } from "react-bootstrap";
+import { Col, Card, Container, Form, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./auth.css";
+import ActionButton from "../../../components/common/action-btn.component";
 
 const LoginPage = () => {
     let loginSchema = Yup.object({
@@ -56,9 +57,7 @@ const LoginPage = () => {
                                     label="Remember me"
                                 />
                             </Form.Group>
-                            <Button variant="primary" type="submit" className="w-100">
-                                Login
-                            </Button>
+                            <ActionButton text="Login" />
                         </Form>
                     </Card>
                 </Col>

@@ -1,15 +1,28 @@
-import { Button, Card, Col, Container, Form, Image, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, Image, Row } from "react-bootstrap";
+import { FaEye } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./auth.css";
 
 import noImage from "../../../assets/images/no-image.jpg";
+import ActionButton from "../../../components/common/action-btn.component";
+import { useState } from "react";
+import axiosInstance from "../../../services/axios.service";
 
 const RegisterPage = () => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     let registerSchema = Yup.object({
         name: Yup.string().required("Fullname is required").min(5).max(30),
         email: Yup.string().email("Invalid email").required("Email is required"),
-        password: Yup.string().matches('^[a-zA-Z0-9]{3,30}$', 'Password should contain at least one uppercase, one lowercase, one unique character, and one number').oneOf([Yup.ref("confirmPassword"), null], "Passwords must match").required("Password is required"),
+        password: Yup.string()
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{3,30}$/, 'Password should contain at least one uppercase, one lowercase, one unique character, and one number')
+            .oneOf([Yup.ref("confirmPassword"), null], "Passwords must match")
+            .required("Password is required"),
         role: Yup.string().required("Role is required").default("customer"),
         address: Yup.object({
             temp: Yup.object({
@@ -62,23 +75,34 @@ const RegisterPage = () => {
             status: "inactive",
         },
         validationSchema: registerSchema,
-        onSubmit: (values) => {
-            console.log(values);
-            values.address = JSON.stringify(values.address);
-            // FormData
-            let formData = new FormData();
-            if (values.userImage) {
-                formData.append("userImage", values.userImage, values.userImage.name);
-                delete values.userImage;
+        onSubmit: async (values) => {
+            try {
+                let finalSubmission = { ...values };
+                finalSubmission.address = JSON.stringify(values.address);
+                // FormData
+                let formData = new FormData();
+                if (finalSubmission.userImage) {
+                    formData.append("userImage", finalSubmission.userImage, finalSubmission.userImage.name);
+                    delete finalSubmission.userImage;
+                }
+                /*formData.append('name', finalSubmission.name);
+                formData.append('email', finalSubmission.email);
+                formData.append('password', finalSubmission.password);*/
+
+                (Object.keys(finalSubmission)).map((key) => formData.append(key, finalSubmission[key]));
+
+                let response = await axiosInstance.post("api/v1/register", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
+                console.log(response);
+                // TODO: Redirect to dashboard
             }
-            /*formData.append('name', values.name);
-            formData.append('email', values.email);
-            formData.append('password', values.password);*/
-
-            (Object.keys(values)).map((key) => formData.append(key, values[key]));
-
-            // TODO: Register API
-            // TODO: Redirect to dashboard
+            catch (error) {
+                console.log(error);
+            }
         }
     });
 
@@ -437,19 +461,30 @@ const RegisterPage = () => {
                             <Row>
                                 <Form.Group as={Col} className="mb-3">
                                     <Form.Label>Password:</Form.Label>
-                                    <Form.Control
-                                        name="password"
-                                        type="password"
-                                        placeholder="Enter password"
-                                        onChange={formik.handleChange}
-                                    />
+                                    <div className="input-group">
+                                        <Form.Control
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="Enter password"
+                                            onChange={formik.handleChange}
+                                        />
+                                        <button
+                                            className="btn btn-outline-secondary"
+                                            type="button"
+                                            onClick={toggleShowPassword}
+                                        >
+                                            <span className="input-group-text">
+                                                {showPassword ? <FaEye /> : <FaEye />}
+                                            </span>
+                                        </button>
+                                    </div>
                                     <span className="text-danger">{formik.errors.password}</span>
                                 </Form.Group>
                                 <Form.Group as={Col} className="mb-3">
                                     <Form.Label>Confirm Password:</Form.Label>
                                     <Form.Control
                                         name="confirmPassword"
-                                        type="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         placeholder="Enter confirm password"
                                         onChange={formik.handleChange}
                                     />
@@ -457,9 +492,7 @@ const RegisterPage = () => {
                             </Row>
                             <Row>
                                 <Form.Group className="mb-3">
-                                    <Button variant="primary" type="submit" className="w-100">
-                                        Register
-                                    </Button>
+                                    <ActionButton text="Register" />
                                 </Form.Group>
                             </Row>
                         </Form>
