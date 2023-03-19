@@ -4,8 +4,9 @@ import * as Yup from "yup";
 import "./auth.css";
 import ActionButton from "../../../components/common/action-btn.component";
 import { toast } from "react-toastify";
-import authService from "./auth.service";
+import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect } from "react";
 
 const LoginPage = () => {
     let navigate = useNavigate();
@@ -25,8 +26,8 @@ const LoginPage = () => {
             try {
                 let response = await authService.loginUser({ ...credentials });
                 if (response.status) {
-                    localStorage.setItem("accessToken", response.result.token);
-                    localStorage.setItem("_au", JSON.stringify({
+                    localStorage.setItem(process.env.REACT_APP_ACCESSTOKEN_KEY, response.result.token);
+                    localStorage.setItem(process.env.REACT_APP_AUTHTOKEN_KEY, JSON.stringify({
                         id: response.result.user._id,
                         name: response.result.user.name,
                         email: response.result.user.email,
@@ -35,8 +36,8 @@ const LoginPage = () => {
                     }));
                 }
 
-                navigate("/dashboard");
-                toast.success(response.msg);
+                navigate(`/${response.result.user.role}`);
+                toast.success(`Welcome to the ${response.result.user.role} panel, ${response.result.user.name}`);
                 // Navigating resets the form. No need to call resetForm()
                 resetForm();
             } catch (error) {
@@ -44,6 +45,26 @@ const LoginPage = () => {
             }
         }
     });
+
+    // Memoize the loginCheck function
+    const loginCheck = useCallback(
+        async () => {
+            try {
+                let response = await authService.getLoggedInUser();
+                if (response.status) {
+                    navigate(`/${response.result.role}`);
+                    toast.success(`Welcome to the ${response.result.role} panel, ${response.result.name}`);
+                }
+            } catch (error) {
+                // Do nothing
+            }
+        }, [navigate]
+    );
+
+    useEffect(() => {
+        // If user is already logged in, redirect to dashboard
+        loginCheck();
+    }, [loginCheck]);
 
     return (<>
         <Container>
