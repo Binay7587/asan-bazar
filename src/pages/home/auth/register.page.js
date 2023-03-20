@@ -8,7 +8,7 @@ import noImage from "../../../assets/images/no-image.jpg";
 import ActionButton from "../../../components/common/action-btn.component";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import authService from "./auth.service";
+import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {

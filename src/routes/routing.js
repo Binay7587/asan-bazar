@@ -10,6 +10,7 @@ import HomePageLayout from '../pages/layout/home-page.layout';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PermissionRoute from './permissionRoutes';
 
 const Routing = () => {
     return (<>
@@ -24,16 +25,16 @@ const Routing = () => {
                     <Route path="brands/:slug" element={<BrandDetail />} />
                 </Route>
 
-                <Route path="/admin" element={<AdminLayout />} >
+                <Route path="/admin" element={<PermissionRoute component={<AdminLayout />} checkRole="admin" />}  >
                     <Route index element={<AdminDashboard />} />
                     <Route path="profile" element={<AdminProfile />} />
                 </Route>
 
-                <Route path="/seller" element={<AdminLayout />} >
+                <Route path="/seller" element={<PermissionRoute component={<AdminLayout />} checkRole="seller" />}  >
                     <Route index element={<>Seller Dashboard</>} />
                 </Route>
 
-                <Route path="/customer" element={<AdminLayout />} >
+                <Route path="/customer" element={<PermissionRoute component={<AdminLayout />} checkRole="customer" />}  >
                     <Route index element={<>Customer Dashboard</>} />
                 </Route>
 

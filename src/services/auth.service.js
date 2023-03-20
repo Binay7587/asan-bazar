@@ -1,4 +1,4 @@
-import HttpService from "../../../services/http.service";
+import HttpService from "./http.service";
 
 export class AuthService extends HttpService {
     registerUser = async (data) => {
@@ -29,6 +29,18 @@ export class AuthService extends HttpService {
             return response;
         }
         catch (err) {
+            throw err;
+        }
+    }
+
+    getLoggedInUser = async () => {
+        try {
+            let response = await this.getRequest("api/v1/me", { login: true });
+            return response;
+        }
+        catch (err) {
+            localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+            localStorage.removeItem(process.env.REACT_APP_AUTHTOKEN_KEY);
             throw err;
         }
     }

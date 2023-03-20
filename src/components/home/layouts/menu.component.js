@@ -2,8 +2,32 @@ import { Container, Navbar, Nav, Form, Row, Col } from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
 import { FaFacebook, FaShoppingCart, FaTwitter } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
+import "../../../assets/css/home.css"
+import helpers from "../../../config/helpers";
+import authService from "../../../services/auth.service";
+import { useEffect, useState } from "react";
 
 const HomeMenu = () => {
+    let [user, setUser] = useState()
+    const isLoggedIn = helpers.getLoggedInStatus();
+
+    const getUser = async () => {
+        try {
+            let response = await authService.getLoggedInUser();
+            if (response.status) {
+                setUser(response.result);
+            }
+        } catch (error) {
+            // Do nothing
+        }
+    }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            getUser();
+        }
+    })
+    // let user = await 
     return (<>
         <Navbar bg="light" variant="light" className="py-1">
             <Container>
@@ -47,12 +71,20 @@ const HomeMenu = () => {
                     <NavLink to="/cart" className={"nav-link"}>
                         <FaShoppingCart size={20} />
                     </NavLink>
-                    <NavLink to="/login" className={"nav-link"}>
-                        Login
-                    </NavLink>
-                    <NavLink to="/register" className={"nav-link"}>
-                        Register
-                    </NavLink>
+                    {
+                        user ? <>
+                            <NavLink to={`/${user.role}`} className={"nav-link"}>
+                                {user.name}
+                            </NavLink>
+                        </> : <>
+                            <NavLink to="/login" className={"nav-link"}>
+                                Login
+                            </NavLink>
+                            <NavLink to="/register" className={"nav-link"}>
+                                Register
+                            </NavLink>
+                        </>
+                    }
                 </Nav>
             </Container >
         </Navbar >

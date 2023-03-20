@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import HomeMenu from "../home/components/menu.component";
+import HomeMenu from "../../components/home/layouts/menu.component";
 import { Outlet } from "react-router-dom";
-import FooterComponent from "../home/components/footer.component";
+import FooterComponent from "../../components/home/layouts/footer.component";
 
 const HomePageLayout = () => {
     return (<>
