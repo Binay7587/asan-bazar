@@ -2,6 +2,7 @@ import { Container, Navbar, Nav, Form, Row, Col } from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
 import { FaFacebook, FaShoppingCart, FaTwitter } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
+import "../../../assets/css/home.css"
 import helpers from "../../../config/helpers";
 import authService from "../../../services/auth.service";
 import { useEffect, useState } from "react";

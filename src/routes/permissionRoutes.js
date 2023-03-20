@@ -28,7 +28,10 @@ const PermissionRoute = ({ component, checkRole }) => {
         authCheck();
     }, [authCheck]);
 
-    return loading ? <div>Loading...</div> : component;
+    return loading ?
+        <div className="preloader" >
+            <div className="spinner" ></div >
+        </div > : component;
 }
 
 export default PermissionRoute;

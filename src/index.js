@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import "./assets/css/main.css"
+import "./assets/css/common.css"
 
 import Routing from './routes/routing';
 
