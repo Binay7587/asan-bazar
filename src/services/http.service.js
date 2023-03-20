@@ -10,7 +10,8 @@ class HttpService {
         if (config.login) {
             let token = localStorage.getItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
             if (!token) {
-                throw new Error({ status: 401, msg: "Unauthorized" });
+                let error = { status: 401, msg: "Unauthorized" };
+                throw error;
             }
             this.headers["Authorization"] = "Bearer " + token;
         }
