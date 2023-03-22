@@ -1,13 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { Row } from "react-bootstrap";
+import { FaAddressBook } from "react-icons/fa";
+import AdminBreadCrumb from "../../components/admin/breadcrumb.component";
+import CountWidget from "../../components/admin/count-widget.component";
 
 const AdminDashboard = () => {
     return (<>
         <div className="container-fluid px-4">
-            <h1 className="mt-4">Static Navigation</h1>
-            <ol className="breadcrumb mb-4">
-                <li className="breadcrumb-item"><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
-                <li className="breadcrumb-item active">Static Navigation</li>
-            </ol>
+            <h1 className="mt-4">Dashboard</h1>
+            <AdminBreadCrumb path={[
+                { title: "Dashboard", url: "/admin" },
+                { title: "Overview" }
+            ]} />
+            <Row className="mb-4">
+                <CountWidget count={'1,23,00,000'} color={'primary'} icon={<FaAddressBook />} title={"Users"} />
+                <CountWidget count={'1,23,00,000'} color={'danger'} icon={<FaAddressBook />} title={"Users"} />
+                <CountWidget count={'1,23,00,000'} color={'success'} icon={<FaAddressBook />} title={"Users"} />
+                <CountWidget count={'1,23,00,000'} color={'warning'} icon={<FaAddressBook />} title={"Users"} />
+            </Row>
             <div className="card mb-4">
                 <div className="card-body">
                     <p className="mb-0">
@@ -19,8 +28,6 @@ const AdminDashboard = () => {
                     </p>
                 </div>
             </div>
-            <div style={{ height: "100vh" }}></div>
-            <div className="card mb-4"><div className="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
         </div>
     </>)
 };
