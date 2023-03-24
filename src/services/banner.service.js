@@ -28,6 +28,15 @@ export class BannerService extends HttpService {
             throw err;
         }
     }
+
+    getActiveBanners = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/banner/list`, { login: true });
+            return response;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 const bannerService = new BannerService();
