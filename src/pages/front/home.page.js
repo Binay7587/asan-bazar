@@ -1,5 +1,5 @@
 import { Container, Image, Row, Col, Card } from "react-bootstrap";
-import SingleGridComponent from "../../components/home/product/single-grid.component";
+import SingleGridComponent from "../../components/front/product/single-grid.component";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

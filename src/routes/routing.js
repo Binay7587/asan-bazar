@@ -2,15 +2,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AdminLayout from '../pages/admin/admin.layout';
 import AdminDashboard from '../pages/admin/dashboard.page';
 import AdminProfile from '../pages/admin/profile.page';
-import LoginPage from '../pages/home/auth/login.page';
-import RegisterPage from '../pages/home/auth/register.page';
-import BrandDetail from '../pages/home/brand/brand-detail.page';
-import HomePage from '../pages/home/home.page';
+import LoginPage from '../pages/front/auth/login.page';
+import RegisterPage from '../pages/front/auth/register.page';
+import BrandDetail from '../pages/front/brand/brand-detail.page';
+import HomePage from '../pages/front/home.page';
 import HomePageLayout from '../pages/layout/home-page.layout';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
+import { AdminBannerCreate, AdminBannerList } from '../pages/admin';
 
 const Routing = () => {
     return (<>
@@ -27,6 +28,8 @@ const Routing = () => {
 
                 <Route path="/admin" element={<PermissionRoute component={<AdminLayout />} checkRole="admin" />}  >
                     <Route index element={<AdminDashboard />} />
+                    <Route path='banner' element={<AdminBannerList />} />
+                    <Route path='banner/create' element={<AdminBannerCreate />} />
                     <Route path="profile" element={<AdminProfile />} />
                 </Route>
 

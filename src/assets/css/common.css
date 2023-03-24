@@ -12,6 +12,11 @@ body {
   border-radius: 50%;
 }
 
+.img-banner-md {
+  width: 150px;
+  height: 100px;
+}
+
 /* Preloader */
 .preloader {
   display: flex;
