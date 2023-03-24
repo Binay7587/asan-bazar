@@ -17,7 +17,7 @@ const AdminTopNav = () => {
 
     return (<>
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <NavLink className="navbar-brand ps-3" to="/">Start Bootstrap</NavLink>
+            <NavLink className="navbar-brand ps-3" to="/">Ecommerce</NavLink>
             <button onClick={toogleSidebar} className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" to="#!"><FaBars /></button>
             <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div className="input-group">

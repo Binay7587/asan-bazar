@@ -3,13 +3,12 @@ import logo from '../../../assets/images/logo.svg';
 import { FaFacebook, FaShoppingCart, FaTwitter } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 import "../../../assets/css/home.css"
-import helpers from "../../../config/helpers";
+import { getLoggedInStatus } from "../../../config/helpers";
 import authService from "../../../services/auth.service";
 import { useEffect, useState } from "react";
 
 const HomeMenu = () => {
     let [user, setUser] = useState()
-    const isLoggedIn = helpers.getLoggedInStatus();
 
     const getUser = async () => {
         try {
@@ -23,7 +22,7 @@ const HomeMenu = () => {
     }
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (getLoggedInStatus) {
             getUser();
         }
     })

@@ -11,6 +11,7 @@ import HomePageLayout from '../pages/layout/home-page.layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
+import { AdminBannerCreate, AdminBannerList } from '../pages/admin';
 
 const Routing = () => {
     return (<>
@@ -27,6 +28,8 @@ const Routing = () => {
 
                 <Route path="/admin" element={<PermissionRoute component={<AdminLayout />} checkRole="admin" />}  >
                     <Route index element={<AdminDashboard />} />
+                    <Route path='banner' element={<AdminBannerList />} />
+                    <Route path='banner/create' element={<AdminBannerCreate />} />
                     <Route path="profile" element={<AdminProfile />} />
                 </Route>
 
