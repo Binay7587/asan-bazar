@@ -1,13 +1,12 @@
-import DataTable from 'react-data-table-component';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
-import customStyles from '../../../assets/styles/tables.styles';
 import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
 import bannerService from '../../../services/banner.service';
 import { capitalizeFirstLetter } from '../../../config/helpers';
 
 import noImage from "../../../assets/images/no-image.jpg";
+import CustomDataTable from '../../../components/common/custom-datatable.component';
 
 const AdminBannerList = () => {
     const [data, setData] = useState([]);
@@ -17,6 +16,31 @@ const AdminBannerList = () => {
         "perPage": 10,
         "currentPage": 1
     });
+
+    const columns = [
+        {
+            name: 'Title',
+            selector: row => row.title,
+            sortable: true,
+        },
+        {
+            name: 'Image',
+            selector: row => <img src={row.bannerImage ? process.env.REACT_APP_BASE_URL + '/images' + row.bannerImage : noImage}
+                className="img-fluid img-banner-md"
+                alt="" />,
+            sortable: true,
+        },
+        {
+            name: 'Status',
+            selector: row => capitalizeFirstLetter(row.status),
+            sortable: true,
+        },
+        {
+            name: 'Action',
+            selector: row => <>Edit / Delete</>,
+            sortable: false,
+        },
+    ]
 
     const getBannerList = useCallback(
         async (config) => {
@@ -68,40 +92,12 @@ const AdminBannerList = () => {
             ]} />
             <div className="card mb-4">
                 <div className="card-body">
-                    <DataTable
-                        customStyles={customStyles}
-                        columns={[
-                            {
-                                name: 'Title',
-                                selector: row => row.title,
-                                sortable: true,
-                            },
-                            {
-                                name: 'Image',
-                                selector: row => <img src={row.bannerImage ? process.env.REACT_APP_BASE_URL + '/images' + row.bannerImage : noImage}
-                                    className="img-fluid img-banner-md"
-                                    alt="" />,
-                                sortable: true,
-                            },
-                            {
-                                name: 'Status',
-                                selector: row => capitalizeFirstLetter(row.status),
-                                sortable: true,
-                            },
-                            {
-                                name: 'Action',
-                                selector: row => <>Edit / Delete</>,
-                                sortable: false,
-                            },
-                        ]}
+                    <CustomDataTable columns={columns}
                         data={data}
-                        highlightOnHover
-                        progressPending={loading}
-                        pagination
-                        paginationServer
-                        paginationTotalRows={paginate.totalCount}
-                        onChangeRowsPerPage={handlePerPageChange}
-                        onChangePage={handlePageChange}
+                        loading={loading}
+                        totalCount={paginate.totalCount}
+                        handlePageChange={handlePageChange}
+                        handlePerPageChange={handlePerPageChange}
                     />
                 </div>
             </div>
