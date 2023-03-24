@@ -43,7 +43,7 @@ const AdminBannerForm = ({ defaultValue, submitEvent }) => {
                 <Col sm={9}>
                     <Form.Control
                         name="link"
-                        type="link"
+                        type="url"
                         placeholder="Enter banner link"
                         onChange={formik.handleChange}
                         value={formik.values.link}
