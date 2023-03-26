@@ -5,8 +5,9 @@ import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
 import bannerService from '../../../services/banner.service';
 import { capitalizeFirstLetter } from '../../../config/helpers';
 
-import noImage from "../../../assets/images/no-image.jpg";
+import noBannerImage from '../../../assets/images/noBannerImage.png';
 import CustomDataTable from '../../../components/common/custom-datatable.component';
+import { ImageFormatter, StatusBadgeFormatter } from '../../../components/common/formatter.component';
 
 const AdminBannerList = () => {
     const [data, setData] = useState([]);
@@ -25,14 +26,12 @@ const AdminBannerList = () => {
         },
         {
             name: 'Image',
-            selector: row => <img src={row.bannerImage ? process.env.REACT_APP_BASE_URL + '/images' + row.bannerImage : noImage}
-                className="img img-fluid"
-                alt="" />,
+            selector: row => <ImageFormatter url={row.bannerImage} noImageUrl={noBannerImage} />,
             sortable: true,
         },
         {
             name: 'Status',
-            selector: row => capitalizeFirstLetter(row.status),
+            selector: row => <StatusBadgeFormatter status={row.status} />,
             sortable: true,
         },
         {
