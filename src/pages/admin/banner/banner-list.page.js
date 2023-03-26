@@ -26,7 +26,7 @@ const AdminBannerList = () => {
         {
             name: 'Image',
             selector: row => <img src={row.bannerImage ? process.env.REACT_APP_BASE_URL + '/images' + row.bannerImage : noImage}
-                className="img-fluid img-banner-md"
+                className="img img-fluid"
                 alt="" />,
             sortable: true,
         },
