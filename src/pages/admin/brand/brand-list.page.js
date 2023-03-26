@@ -8,6 +8,7 @@ import { capitalizeFirstLetter } from '../../../config/helpers';
 import CustomDataTable from '../../../components/common/custom-datatable.component';
 import { ImageFormatter, StatusBadgeFormatter } from '../../../components/common/formatter.component';
 import noBrandImage from '../../../assets/images/noBannerImage.png';
+import TableButtonComponent from '../../../components/common/table-btn.component';
 
 const AdminBrandList = () => {
     const [data, setData] = useState([]);
@@ -36,7 +37,7 @@ const AdminBrandList = () => {
         },
         {
             name: 'Action',
-            selector: row => <>Edit / Delete</>,
+            selector: row => <TableButtonComponent />,
             sortable: false,
         },
     ]
