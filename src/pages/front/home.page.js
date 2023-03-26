@@ -1,14 +1,5 @@
-import { Container, Image, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import SingleGridComponent from "../../components/front/product/single-grid.component";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
-import banner1 from '../../assets/images/banners/banner1.jpg';
-import banner2 from '../../assets/images/banners/banner2.jpg';
-import banner3 from '../../assets/images/banners/banner3.jpg';
-import banner4 from '../../assets/images/banners/banner4.jpg';
 
 import brand1 from '../../assets/images/brands/brand1.png';
 import brand2 from '../../assets/images/brands/brand2.png';
@@ -17,36 +8,12 @@ import brand4 from '../../assets/images/brands/brand4.png';
 import brand5 from '../../assets/images/brands/brand5.png';
 import brand6 from '../../assets/images/brands/brand6.jpg';
 import { NavLink } from "react-router-dom";
+import HomePageBanner from "../../components/front/home/banner.component";
 
 const HomePage = () => {
-    const settings = {
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        initialSlide: 0
-    };
 
     return (<>
-        <div className="banner-wrapper">
-            <Slider {...settings}>
-                <div>
-                    <Image src={banner1} className="img img-fluid" alt="banner" />
-                </div>
-                <div>
-                    <Image src={banner2} className="img img-fluid" alt="banner" />
-                </div>
-                <div>
-                    <Image src={banner3} className="img img-fluid" alt="banner" />
-                </div>
-                <div>
-                    <Image src={banner4} className="img img-fluid" alt="banner" />
-                </div>
-            </Slider>
-        </div>
+        <HomePageBanner />
 
         <Container className="my-5 bg-white" fluid>
             <Row className="py-1">

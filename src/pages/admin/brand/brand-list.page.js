@@ -2,15 +2,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
-import bannerService from '../../../services/banner.service';
+import brandService from '../../../services/brand.service';
 import { capitalizeFirstLetter } from '../../../config/helpers';
 
-import noBannerImage from '../../../assets/images/noBannerImage.png';
 import CustomDataTable from '../../../components/common/custom-datatable.component';
 import { ImageFormatter, StatusBadgeFormatter } from '../../../components/common/formatter.component';
+import noBrandImage from '../../../assets/images/noBannerImage.png';
 import TableButtonComponent from '../../../components/common/table-btn.component';
 
-const AdminBannerList = () => {
+const AdminBrandList = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [paginate, setPaginate] = useState({
@@ -27,7 +27,7 @@ const AdminBannerList = () => {
         },
         {
             name: 'Image',
-            selector: row => <ImageFormatter url={row.bannerImage} noImageUrl={noBannerImage} />,
+            selector: row => <ImageFormatter url={row.brandImage} noImageUrl={noBrandImage} />,
             sortable: true,
         },
         {
@@ -42,11 +42,11 @@ const AdminBannerList = () => {
         },
     ]
 
-    const getBannerList = useCallback(
+    const getBrandList = useCallback(
         async (config) => {
             try {
                 setLoading(true);
-                const response = await bannerService.getBannerList(config);
+                const response = await brandService.getBrandList(config);
                 if (response.status) {
                     setData(response.result);
                     setPaginate((prevPaginate) => ({
@@ -66,28 +66,28 @@ const AdminBannerList = () => {
 
     const handlePerPageChange = (newPerPage, newPage) => {
         setPaginate({ ...paginate, perPage: newPerPage, currentPage: newPage })
-        getBannerList({ perPage: newPerPage, page: newPage });
+        getBrandList({ perPage: newPerPage, page: newPage });
     }
 
     const handlePageChange = (newPage) => {
         setPaginate({ ...paginate, currentPage: newPage })
-        getBannerList({ perPage: paginate.perPage, page: newPage });
+        getBrandList({ perPage: paginate.perPage, page: newPage });
     }
 
     useEffect(() => {
-        getBannerList({ perPage: paginate.perPage, page: paginate.currentPage });
-    }, [getBannerList, paginate.currentPage, paginate.perPage]);
+        getBrandList({ perPage: paginate.perPage, page: paginate.currentPage });
+    }, [getBrandList, paginate.currentPage, paginate.perPage]);
 
     return (
         <div className="container-fluid px-4" >
             <h1 className="mt-4">
-                Banner list Page
-                <NavLink to="/admin/banner/create" className="btn btn-sm btn-primary float-end">
-                    <FaPlus /> Add Banner
+                Brand list Page
+                <NavLink to="/admin/brand/create" className="btn btn-sm btn-primary float-end">
+                    <FaPlus /> Add Brand
                 </NavLink>
             </h1>
             <AdminBreadCrumb path={[
-                { title: "Banner", url: "/admin/banner" },
+                { title: "Brand", url: "/admin/brand" },
                 { title: "List" }
             ]} />
             <div className="card mb-4">
@@ -105,4 +105,4 @@ const AdminBannerList = () => {
     )
 }
 
-export default AdminBannerList
+export default AdminBrandList
