@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
 import brandService from '../../../services/brand.service';
-import { capitalizeFirstLetter } from '../../../config/helpers';
 
 import CustomDataTable from '../../../components/common/custom-datatable.component';
 import { ImageFormatter, StatusBadgeFormatter } from '../../../components/common/formatter.component';
