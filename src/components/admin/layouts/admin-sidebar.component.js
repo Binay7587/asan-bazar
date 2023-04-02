@@ -21,7 +21,7 @@ const AdminSideNav = () => {
                             <div className="sb-nav-link-icon"><FaPaperclip /></div>
                             Brand Module
                         </NavLink>
-                        <NavLink className="nav-link" to="/admin.category">
+                        <NavLink className="nav-link" to="/admin/category">
                             <div className="sb-nav-link-icon"><FaSitemap /></div>
                             Category Module
                         </NavLink>

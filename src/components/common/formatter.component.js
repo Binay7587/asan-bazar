@@ -9,7 +9,7 @@ export const ImageFormatter = ({ url, noImageUrl = noImage }) => {
 
 export const StatusBadgeFormatter = ({ status }) => {
     return (<>
-        <span className={`badge bg-${status === 'active' ? 'success' : 'danger'}`}>{capitalizeFirstLetter(status)}</span>
+        <span className={`badge bg-${status === 'active' ? 'success' : 'danger'}`}>{status ?? capitalizeFirstLetter(status)}</span>
     </>)
 }
 
