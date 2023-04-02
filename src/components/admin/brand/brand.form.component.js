@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { toast } from "react-toastify";
-import { Col, Form, Row } from "react-bootstrap"
+import { Col, Form, Image, Row } from "react-bootstrap"
 import ActionButton from "../../common/action-btn.component";
+import noUserImage from "../../../assets/images/no-image.jpg";
 
 const AdminBrandForm = ({ defaultValue, submitEvent }) => {
     let validationRule = Yup.object({
@@ -15,7 +16,10 @@ const AdminBrandForm = ({ defaultValue, submitEvent }) => {
         validationSchema: validationRule,
         onSubmit: async (values) => {
             try {
-                submitEvent(values)
+                // FormData
+                let formData = new FormData();
+                (Object.keys(values)).map((key) => formData.append(key, values[key]));
+                submitEvent(formData)
             } catch (error) {
                 toast.error(error.data.msg);
             }
@@ -38,8 +42,24 @@ const AdminBrandForm = ({ defaultValue, submitEvent }) => {
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3">
+                <Form.Label className="col-sm-3">Status:</Form.Label>
+                <Col sm={6}>
+                    <Form.Select
+                        name="status"
+                        required
+                        size="sm"
+                        onChange={formik.handleChange}
+                        value={formik.values?.status}>
+                        <option>--Select Any One--</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </Form.Select>
+                    <span className="text-danger">{formik.errors.status}</span>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
                 <Form.Label className="col-sm-3">Image:</Form.Label>
-                <Col sm={9}>
+                <Col sm={6}>
                     <Form.Control
                         name="brandImage"
                         type="file"
@@ -50,20 +70,17 @@ const AdminBrandForm = ({ defaultValue, submitEvent }) => {
                     />
                     <span className="text-danger">{formik.errors.brandImage}</span>
                 </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3">
-                <Form.Label className="col-sm-3">Status:</Form.Label>
-                <Col sm={9}>
-                    <Form.Select
-                        name="status"
-                        required
-                        size="sm"
-                        onChange={formik.handleChange}>
-                        <option>--Select Any One--</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </Form.Select>
-                    <span className="text-danger">{formik.errors.status}</span>
+                <Col sm={3}>
+                    {
+                        typeof (formik.values?.brandImage) === 'string' ?
+                            (
+                                formik.values?.brandImage ? <Image src={`${process.env.REACT_APP_BASE_URL}/images${formik.values?.brandImage}`} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
+                            )
+                            :
+                            (
+                                formik.values?.brandImage ? <Image src={URL.createObjectURL(formik.values?.brandImage)} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
+                            )
+                    }
                 </Col>
             </Form.Group>
 

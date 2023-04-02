@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
 import brandService from '../../../services/brand.service';
+import { toast } from "react-toastify";
 
+import noBrandImage from '../../../assets/images/no-image.jpg';
 import CustomDataTable from '../../../components/common/custom-datatable.component';
 import { ImageFormatter, StatusBadgeFormatter } from '../../../components/common/formatter.component';
-import noBrandImage from '../../../assets/images/noBannerImage.png';
 import TableButtonComponent from '../../../components/common/table-btn.component';
 
 const AdminBrandList = () => {
@@ -17,6 +18,18 @@ const AdminBrandList = () => {
         "perPage": 10,
         "currentPage": 1
     });
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await brandService.deleteBrandById(id);
+            if (response.status) {
+                toast.success(response.msg);
+                loadAllBrands({ perPage: 10, page: 1 });
+            }
+        } catch (error) {
+            // Do nothing
+        }
+    }
 
     const columns = [
         {
@@ -36,12 +49,12 @@ const AdminBrandList = () => {
         },
         {
             name: 'Action',
-            selector: row => <TableButtonComponent />,
+            selector: row => <TableButtonComponent id={row._id} handleDelete={handleDelete} editUrl={'/admin/brand'} />,
             sortable: false,
         },
     ]
 
-    const getBrandList = useCallback(
+    const loadAllBrands = useCallback(
         async (config) => {
             try {
                 setLoading(true);
@@ -65,17 +78,17 @@ const AdminBrandList = () => {
 
     const handlePerPageChange = (newPerPage, newPage) => {
         setPaginate({ ...paginate, perPage: newPerPage, currentPage: newPage })
-        getBrandList({ perPage: newPerPage, page: newPage });
+        loadAllBrands({ perPage: newPerPage, page: newPage });
     }
 
     const handlePageChange = (newPage) => {
         setPaginate({ ...paginate, currentPage: newPage })
-        getBrandList({ perPage: paginate.perPage, page: newPage });
+        loadAllBrands({ perPage: paginate.perPage, page: newPage });
     }
 
     useEffect(() => {
-        getBrandList({ perPage: paginate.perPage, page: paginate.currentPage });
-    }, [getBrandList, paginate.currentPage, paginate.perPage]);
+        loadAllBrands({ perPage: paginate.perPage, page: paginate.currentPage });
+    }, [loadAllBrands, paginate.currentPage, paginate.perPage]);
 
     return (
         <div className="container-fluid px-4" >

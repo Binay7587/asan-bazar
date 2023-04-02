@@ -3,15 +3,7 @@ import HttpService from "./http.service";
 export class BrandService extends HttpService {
     createBrand = async (data) => {
         try {
-            // FormData
-            let formData = new FormData();
-            if (data.brandImage) {
-                formData.append("brandImage", data.brandImage, data.brandImage.name);
-                delete data.brandImage;
-            }
-            (Object.keys(data)).map((key) => formData.append(key, data[key]));
-
-            let response = await this.postRequest("api/v1/brand", formData, { login: true, file: true });
+            let response = await this.postRequest("api/v1/brand", data, { file: true, login: true });
             return response;
         }
         catch (err) {
@@ -31,9 +23,39 @@ export class BrandService extends HttpService {
 
     getActiveBrands = async () => {
         try {
-            let response = await this.getRequest(`api/v1/brand/list`, { login: true });
+            let response = await this.getRequest(`api/v1/brand/active`, { login: true });
             return response;
         } catch (err) {
+            throw err;
+        }
+    }
+
+    getBrandById = async (id) => {
+        try {
+            let response = await this.getRequest(`api/v1/brand/${id}`, { login: true });
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    deleteBrandById = async (id) => {
+        try {
+            let response = await this.deleteRequest(`api/v1/brand/${id}`, { login: true });
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    updateBrandById = async (data, id) => {
+        try {
+            let response = await this.putRequest(`api/v1/brand/${id}`, data, { file: true, login: true });
+            return response;
+        }
+        catch (err) {
             throw err;
         }
     }
