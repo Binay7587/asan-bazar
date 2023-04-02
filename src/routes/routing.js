@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
 import { AdminBannerCreate, AdminBannerList, AdminBrandCreate, AdminBrandList } from '../pages/admin';
+import AdminBannerEdit from '../pages/admin/banner/banner-edit.page';
 
 const Routing = () => {
     return (<>
@@ -30,6 +31,7 @@ const Routing = () => {
                     <Route index element={<AdminDashboard />} />
                     <Route path='banner' element={<AdminBannerList />} />
                     <Route path='banner/create' element={<AdminBannerCreate />} />
+                    <Route path='banner/:id' element={<AdminBannerEdit />} />
 
                     <Route path="brand" element={<AdminBrandList />} />
                     <Route path="brand/create" element={<AdminBrandCreate />} />

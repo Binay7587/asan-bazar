@@ -21,7 +21,7 @@ const AdminBannerCreate = () => {
                 toast.success(response.msg);
             }
         } catch (err) {
-            throw err;
+            toast.error(err.data.msg);
         }
     }
 

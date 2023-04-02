@@ -3,15 +3,7 @@ import HttpService from "./http.service";
 export class BannerService extends HttpService {
     createBanner = async (data) => {
         try {
-            // FormData
-            let formData = new FormData();
-            if (data.bannerImage) {
-                formData.append("bannerImage", data.bannerImage, data.bannerImage.name);
-                delete data.bannerImage;
-            }
-            (Object.keys(data)).map((key) => formData.append(key, data[key]));
-
-            let response = await this.postRequest("api/v1/banner", formData, { login: true, file: true });
+            let response = await this.postRequest("api/v1/banner", data, { file: true, login: true });
             return response;
         }
         catch (err) {
@@ -31,9 +23,39 @@ export class BannerService extends HttpService {
 
     getActiveBanners = async () => {
         try {
-            let response = await this.getRequest(`api/v1/banner/list`, { login: true });
+            let response = await this.getRequest(`api/v1/banner/active`, { login: true });
             return response;
         } catch (err) {
+            throw err;
+        }
+    }
+
+    getBannerById = async (id) => {
+        try {
+            let response = await this.getRequest(`api/v1/banner/${id}`, { login: true });
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    deleteBannerById = async (id) => {
+        try {
+            let response = await this.deleteRequest(`api/v1/banner/${id}`, { login: true });
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    updateBannerById = async (data, id) => {
+        try {
+            let response = await this.putRequest(`api/v1/banner/${id}`, data, { file: true, login: true });
+            return response;
+        }
+        catch (err) {
             throw err;
         }
     }

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import AdminBreadCrumb from "../../../components/admin/breadcrumb.component";
 import bannerService from '../../../services/banner.service';
-import { capitalizeFirstLetter } from '../../../config/helpers';
+import { toast } from "react-toastify";
 
 import noBannerImage from '../../../assets/images/noBannerImage.png';
 import CustomDataTable from '../../../components/common/custom-datatable.component';
@@ -18,6 +18,18 @@ const AdminBannerList = () => {
         "perPage": 10,
         "currentPage": 1
     });
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await bannerService.deleteBannerById(id);
+            if (response.status) {
+                toast.success(response.msg);
+                loadAllBanners({ perPage: 10, page: 1 });
+            }
+        } catch (error) {
+            // Do nothing
+        }
+    }
 
     const columns = [
         {
@@ -37,12 +49,12 @@ const AdminBannerList = () => {
         },
         {
             name: 'Action',
-            selector: row => <TableButtonComponent />,
+            selector: row => <TableButtonComponent id={row._id} handleDelete={handleDelete} editUrl={'/admin/banner'} />,
             sortable: false,
         },
     ]
 
-    const getBannerList = useCallback(
+    const loadAllBanners = useCallback(
         async (config) => {
             try {
                 setLoading(true);
@@ -66,17 +78,17 @@ const AdminBannerList = () => {
 
     const handlePerPageChange = (newPerPage, newPage) => {
         setPaginate({ ...paginate, perPage: newPerPage, currentPage: newPage })
-        getBannerList({ perPage: newPerPage, page: newPage });
+        loadAllBanners({ perPage: newPerPage, page: newPage });
     }
 
     const handlePageChange = (newPage) => {
         setPaginate({ ...paginate, currentPage: newPage })
-        getBannerList({ perPage: paginate.perPage, page: newPage });
+        loadAllBanners({ perPage: paginate.perPage, page: newPage });
     }
 
     useEffect(() => {
-        getBannerList({ perPage: paginate.perPage, page: paginate.currentPage });
-    }, [getBannerList, paginate.currentPage, paginate.perPage]);
+        loadAllBanners({ perPage: paginate.perPage, page: paginate.currentPage });
+    }, [loadAllBanners, paginate.currentPage, paginate.perPage]);
 
     return (
         <div className="container-fluid px-4" >

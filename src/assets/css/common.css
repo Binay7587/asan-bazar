@@ -12,6 +12,11 @@ body {
   border-radius: 50%;
 }
 
+.profile-md-img {
+  width: 150px;
+  height: 150px;
+}
+
 /* Preloader */
 .preloader {
   display: flex;
