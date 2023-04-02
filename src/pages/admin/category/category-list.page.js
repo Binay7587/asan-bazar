@@ -48,6 +48,11 @@ const AdminCategoryList = () => {
             sortable: true,
         },
         {
+            name: 'Featured',
+            selector: row => row?.featured ? 'Yes' : 'No',
+            sortable: true,
+        },
+        {
             name: 'Status',
             selector: row => <StatusBadgeFormatter status={row.status} />,
             sortable: true,

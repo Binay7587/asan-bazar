@@ -40,6 +40,15 @@ export class CategoryService extends HttpService {
         }
     }
 
+    getFeaturedCategories = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/category/featured`, { login: true });
+            return response;
+        } catch (err) {
+            throw err;
+        }
+    }
+
     getCategoryById = async (id) => {
         try {
             let response = await this.getRequest(`api/v1/category/${id}`, { login: true });

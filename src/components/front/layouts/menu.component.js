@@ -25,7 +25,7 @@ const HomeMenu = () => {
         if (getLoggedInStatus) {
             getUser();
         }
-    })
+    }, [])
     // let user = await 
     return (<>
         <Navbar bg="light" variant="light" className="py-1">

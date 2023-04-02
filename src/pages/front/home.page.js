@@ -9,11 +9,14 @@ import brand5 from '../../assets/images/brands/brand5.png';
 import brand6 from '../../assets/images/brands/brand6.jpg';
 import { NavLink } from "react-router-dom";
 import HomePageBanner from "../../components/front/home/banner.component";
+import CategoryListSection from "../../components/front/home/category-list.component";
 
 const HomePage = () => {
 
     return (<>
         <HomePageBanner />
+
+        <CategoryListSection />
 
         <Container className="my-5 bg-white" fluid>
             <Row className="py-1">
