@@ -11,7 +11,7 @@ import HomePageLayout from '../pages/layout/home-page.layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
-import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit } from '../pages/admin';
+import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit } from '../pages/admin';
 
 const Routing = () => {
     return (<>
@@ -39,6 +39,10 @@ const Routing = () => {
                     <Route path="category" element={<AdminCategoryList />} />
                     <Route path="category/create" element={<AdminCategoryCreate />} />
                     <Route path='category/:id' element={<AdminCategoryEdit />} />
+
+                    <Route path="user" element={<AdminUserList />} />
+                    <Route path="user/create" element={<AdminUserCreate />} />
+                    <Route path='user/:id' element={<AdminUserEdit />} />
 
                     <Route path="profile" element={<AdminProfile />} />
                 </Route>

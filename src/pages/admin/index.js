@@ -9,3 +9,7 @@ export { default as AdminBrandEdit } from "./brand/brand-edit.page";
 export { default as AdminCategoryList } from "./category/category-list.page";
 export { default as AdminCategoryCreate } from "./category/category-create.page";
 export { default as AdminCategoryEdit } from "./category/category-edit.page";
+
+export { default as AdminUserList } from "./user/user-list.page";
+export { default as AdminUserCreate } from "./user/user-create.page";
+export { default as AdminUserEdit } from "./user/user-edit.page";
