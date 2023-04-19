@@ -12,8 +12,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
 import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit } from '../pages/admin';
+import { useDispatch } from 'react-redux';
+import { getLoggedInUser } from '../reducers/user.slicer';
 
 const Routing = () => {
+    let dispatch = useDispatch();
+    dispatch(getLoggedInUser());
+
     return (<>
         <ToastContainer />
         <BrowserRouter>

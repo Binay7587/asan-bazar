@@ -7,9 +7,12 @@ import { toast } from "react-toastify";
 import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setLoggedInUser } from "../../../reducers/user.slicer";
 
 const LoginPage = () => {
     let navigate = useNavigate();
+    let dispatch = useDispatch();
 
     let loginSchema = Yup.object({
         email: Yup.string().email("Invalid email").required("Email is required"),
@@ -27,13 +30,7 @@ const LoginPage = () => {
                 let response = await authService.loginUser({ ...credentials });
                 if (response.status) {
                     localStorage.setItem(process.env.REACT_APP_ACCESSTOKEN_KEY, response.result.token);
-                    localStorage.setItem(process.env.REACT_APP_AUTHTOKEN_KEY, JSON.stringify({
-                        id: response.result.user._id,
-                        name: response.result.user.name,
-                        email: response.result.user.email,
-                        role: response.result.user.role,
-                        userImage: response.result.user.userImage,
-                    }));
+                    dispatch(setLoggedInUser(response.result.user))
                 }
 
                 navigate(`/${response.result.user.role}`);

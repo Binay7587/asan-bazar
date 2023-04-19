@@ -1,7 +1,12 @@
 import { NavLink } from "react-router-dom"
 import { FaImages, FaPaperclip, FaShoppingBag, FaShoppingCart, FaSitemap, FaTachometerAlt, FaUsers } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const AdminSideNav = () => {
+    let user = useSelector((rootUser) => {
+        return rootUser.User.loggedInUser;
+    })
+
     return (<>
         <div id="layoutSidenav_nav">
             <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -41,7 +46,7 @@ const AdminSideNav = () => {
                 </div>
                 <div className="sb-sidenav-footer">
                     <div className="small">Logged in as:</div>
-                    Start Bootstrap
+                    {user.name}
                 </div>
             </nav>
         </div>

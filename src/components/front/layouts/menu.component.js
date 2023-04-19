@@ -3,30 +3,13 @@ import logo from '../../../assets/images/logo.svg';
 import { FaFacebook, FaShoppingCart, FaTwitter } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 import "../../../assets/css/home.css"
-import { getLoggedInStatus } from "../../../config/helpers";
-import authService from "../../../services/auth.service";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const HomeMenu = () => {
-    let [user, setUser] = useState()
+    let user = useSelector((rootUser) => {
+        return rootUser.User.loggedInUser;
+    });
 
-    const getUser = async () => {
-        try {
-            let response = await authService.getLoggedInUser();
-            if (response.status) {
-                setUser(response.result);
-            }
-        } catch (error) {
-            // Do nothing
-        }
-    }
-
-    useEffect(() => {
-        if (getLoggedInStatus) {
-            getUser();
-        }
-    }, [])
-    // let user = await 
     return (<>
         <Navbar bg="light" variant="light" className="py-1">
             <Container>
