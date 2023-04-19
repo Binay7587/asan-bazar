@@ -15,10 +15,10 @@ const AdminCategoryEdit = () => {
             let response = await categoryService.updateCategoryById(data, params.id);
             if (response.status) {
                 navigate("/admin/category");
-                toast.success(response.message);
+                toast.success(response.msg);
             }
         } catch (err) {
-            toast.error(err.data.message);
+            toast.error(err.data.msg);
         }
     }
 

@@ -15,10 +15,10 @@ const AdminBannerEdit = () => {
             let response = await bannerService.updateBannerById(data, params.id);
             if (response.status) {
                 navigate("/admin/banner");
-                toast.success(response.message);
+                toast.success(response.msg);
             }
         } catch (err) {
-            toast.error(err.data.message);
+            toast.error(err.data.msg);
         }
     }
 

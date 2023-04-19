@@ -15,10 +15,10 @@ const AdminBrandEdit = () => {
             let response = await brandService.updateBrandById(data, params.id);
             if (response.status) {
                 navigate("/admin/brand");
-                toast.success(response.message);
+                toast.success(response.msg);
             }
         } catch (err) {
-            toast.error(err.data.message);
+            toast.error(err.data.msg);
         }
     }
 
