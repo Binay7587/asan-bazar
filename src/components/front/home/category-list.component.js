@@ -40,7 +40,7 @@ const CategoryListSection = () => {
                                 </Card.Body>
                             </Card>
                         </Col >)
-                    }) : <>No Categories</>
+                    }) : <Col>No Categories</Col>
                 }
             </Row>
         </Container>

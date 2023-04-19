@@ -11,7 +11,6 @@ const AdminTopNav = () => {
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
-        localStorage.removeItem(process.env.REACT_APP_AUTHTOKEN_KEY);
         navigate('/login');
     }
 

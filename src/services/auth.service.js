@@ -40,7 +40,6 @@ export class AuthService extends HttpService {
         }
         catch (err) {
             localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
-            localStorage.removeItem(process.env.REACT_APP_AUTHTOKEN_KEY);
             throw err;
         }
     }
