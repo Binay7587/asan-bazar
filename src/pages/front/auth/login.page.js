@@ -7,12 +7,15 @@ import { toast } from "react-toastify";
 import authService from "../../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInUser } from "../../../reducers/user.slicer";
 
 const LoginPage = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
+    let user = useSelector((rootUser) => {
+        return rootUser.User.loggedInUser;
+    })
 
     let loginSchema = Yup.object({
         email: Yup.string().email("Invalid email").required("Email is required"),
@@ -47,15 +50,14 @@ const LoginPage = () => {
     const loginCheck = useCallback(
         async () => {
             try {
-                let response = await authService.getLoggedInUser();
-                if (response.status) {
-                    navigate(`/${response.result.role}`);
-                    toast.success(`Welcome to the ${response.result.role} panel, ${response.result.name}`);
+                if (user) {
+                    navigate(`/${user.role}`);
+                    toast.success(`Welcome to the ${user.role} panel, ${user.name}`);
                 }
             } catch (error) {
                 // Do nothing
             }
-        }, [navigate]
+        }, [user, navigate]
     );
 
     useEffect(() => {

@@ -1,7 +1,11 @@
 import { FaBars, FaSearch, FaUser } from "react-icons/fa"
 import { NavLink, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { setLoggedInUser } from "../../../reducers/user.slicer";
 
 const AdminTopNav = () => {
+    let dispatch = useDispatch();
+
     const toogleSidebar = (e) => {
         e.preventDefault();
         document.body.classList.toggle('sb-sidenav-toggled');
@@ -11,6 +15,7 @@ const AdminTopNav = () => {
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+        dispatch(setLoggedInUser(null))
         navigate('/login');
     }
 

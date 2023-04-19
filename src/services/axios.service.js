@@ -1,4 +1,8 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { setLoggedInUser } from "../reducers/user.slicer";
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
@@ -16,11 +20,16 @@ axiosInstance.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     if (error.response.status === 401) {
-        // User is not logged in
-        // TODO: Logout user and redirect to login page
-    } else if (error.response.status === 403) {
-        // User is not authorized
-        // TODO: Navigate to user dashboard
+        let dispatch = useDispatch();
+        let navigate = useNavigate();
+
+        dispatch(setLoggedInUser(null))
+        localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+        navigate('/login');
+        toast.warning('Unauthorized Access!');
+    }else if(error.response.status === 403){
+        // TODO: Redirect to 403 page
+        console.log('Unauthorized Access');
     }
 
     throw error.response;
