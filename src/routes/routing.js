@@ -14,10 +14,16 @@ import PermissionRoute from './permissionRoutes';
 import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit } from '../pages/admin';
 import { useDispatch } from 'react-redux';
 import { getLoggedInUser } from '../reducers/user.slicer';
+import { useEffect } from 'react';
 
 const Routing = () => {
     let dispatch = useDispatch();
-    dispatch(getLoggedInUser());
+    useEffect(() => {
+        let token = localStorage.getItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+        if (token) {
+            dispatch(getLoggedInUser());
+        }
+    }, [])
 
     return (<>
         <ToastContainer />
