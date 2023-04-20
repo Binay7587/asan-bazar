@@ -30,6 +30,15 @@ export class UserService extends HttpService {
         }
     }
 
+    getUsersByType = async (type) => {
+        try {
+            let response = await this.getRequest(`api/v1/user/type/${type}`);
+            return response;
+        } catch (err) {
+            throw err;
+        }
+    }
+
     getUserById = async (id) => {
         try {
             let response = await this.getRequest(`api/v1/user/${id}`, { login: true });

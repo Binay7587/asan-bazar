@@ -13,3 +13,7 @@ export { default as AdminCategoryEdit } from "./category/category-edit.page";
 export { default as AdminUserList } from "./user/user-list.page";
 export { default as AdminUserCreate } from "./user/user-create.page";
 export { default as AdminUserEdit } from "./user/user-edit.page";
+
+export { default as AdminProductList } from "./product/product-list.page";
+export { default as AdminProductCreate } from "./product/product-create.page";
+export { default as AdminProductEdit } from "./product/product-edit.page";

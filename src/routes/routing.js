@@ -11,7 +11,7 @@ import HomePageLayout from '../pages/layout/home-page.layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PermissionRoute from './permissionRoutes';
-import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit } from '../pages/admin';
+import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit, AdminProductList, AdminProductCreate, AdminProductEdit, } from '../pages/admin';
 import { useDispatch } from 'react-redux';
 import { getLoggedInUser } from '../reducers/user.slicer';
 import { useEffect } from 'react';
@@ -54,6 +54,10 @@ const Routing = () => {
                     <Route path="user" element={<AdminUserList />} />
                     <Route path="user/create" element={<AdminUserCreate />} />
                     <Route path='user/:id' element={<AdminUserEdit />} />
+
+                    <Route path="product" element={<AdminProductList />} />
+                    <Route path="product/create" element={<AdminProductCreate />} />
+                    <Route path='product/:id' element={<AdminProductEdit />} />
 
                     <Route path="profile" element={<AdminProfile />} />
                 </Route>
