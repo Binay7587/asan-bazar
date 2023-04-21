@@ -5,7 +5,7 @@ import brand1 from '../../../assets/images/brands/brand1.png';
 import starGrey from '../../../assets/images/star-grey.png';
 import starYellow from '../../../assets/images/star-yellow.png';
 
-const SingleGridComponent = () => {
+const SingleGridProductComponent = () => {
     return (
         <Col sm={12} md={6} lg={3} className="mb-3">
             <Card>
@@ -44,4 +44,4 @@ const SingleGridComponent = () => {
     )
 }
 
-export default SingleGridComponent;
+export default SingleGridProductComponent;

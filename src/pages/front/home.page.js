@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
-import SingleGridComponent from "../../components/front/product/single-grid.component";
+import SingleGridProductComponent from "../../components/front/product/single-grid-product.component";
 
 import brand1 from '../../assets/images/brands/brand1.png';
 import brand2 from '../../assets/images/brands/brand2.png';
@@ -77,15 +77,15 @@ const HomePage = () => {
                 </Col>
             </Row>
             <Row>
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
-                <SingleGridComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
+                <SingleGridProductComponent />
             </Row>
         </Container>
     </>)

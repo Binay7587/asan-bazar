@@ -59,6 +59,16 @@ export class ProductService extends HttpService {
         }
     }
 
+    getProductsByCategorySlug = async (slug) => {
+        try {
+            let response = await this.getRequest(`api/v1/product/category/${slug}`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     deleteProductById = async (id) => {
         try {
             let response = await this.deleteRequest(`api/v1/product/${id}`, { login: true });

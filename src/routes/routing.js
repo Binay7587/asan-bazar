@@ -5,6 +5,8 @@ import AdminProfile from '../pages/admin/profile.page';
 import LoginPage from '../pages/front/auth/login.page';
 import RegisterPage from '../pages/front/auth/register.page';
 import BrandDetail from '../pages/front/brand/brand-detail.page';
+import CategoryListPage from '../pages/front/category/category-list.page';
+import CategoryDetailPage from '../pages/front/category/category-detail.page';
 import HomePage from '../pages/front/home.page';
 import HomePageLayout from '../pages/layout/home-page.layout';
 
@@ -33,7 +35,9 @@ const Routing = () => {
                     <Route index element={<HomePage />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
-
+                    
+                    <Route path="categories" element={<CategoryListPage />} />
+                    <Route path="categories/:slug" element={<CategoryDetailPage />} />
                     <Route path="brands/:slug" element={<BrandDetail />} />
                 </Route>
 
