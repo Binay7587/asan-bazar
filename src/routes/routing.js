@@ -4,7 +4,8 @@ import AdminDashboard from '../pages/admin/dashboard.page';
 import AdminProfile from '../pages/admin/profile.page';
 import LoginPage from '../pages/front/auth/login.page';
 import RegisterPage from '../pages/front/auth/register.page';
-import BrandDetail from '../pages/front/brand/brand-detail.page';
+import BrandListPage from '../pages/front/brand/brand-list.page';
+import BrandDetailPage from '../pages/front/brand/brand-detail.page';
 import CategoryListPage from '../pages/front/category/category-list.page';
 import CategoryDetailPage from '../pages/front/category/category-detail.page';
 import HomePage from '../pages/front/home.page';
@@ -38,7 +39,8 @@ const Routing = () => {
                     
                     <Route path="categories" element={<CategoryListPage />} />
                     <Route path="categories/:slug" element={<CategoryDetailPage />} />
-                    <Route path="brands/:slug" element={<BrandDetail />} />
+                    <Route path="brands" element={<BrandListPage />} />
+                    <Route path="brands/:slug" element={<BrandDetailPage />} />
                 </Route>
 
                 <Route path="/admin" element={<PermissionRoute component={<AdminLayout />} checkRole="admin" />}  >
