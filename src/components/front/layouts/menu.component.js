@@ -11,19 +11,7 @@ const HomeMenu = () => {
     });
 
     return (<>
-        <Navbar bg="light" variant="light" className="py-1">
-            <Container>
-                <Row>
-                    <Col>
-                        <a target={"_blank"} rel="noreferrer" href="https://www.facebook.com/"><FaFacebook /></a>
-                    </Col>
-                    <Col>
-                        <a target={"_blank"} rel="noreferrer" href="https://www.twitter.com/"><FaTwitter /></a>
-                    </Col>
-                </Row>
-            </Container>
-        </Navbar>
-        <Navbar bg="dark" variant="dark">
+        <Navbar variant="dark" style={{backgroundColor: "#ffa500"}}>
             <Container>
                 <NavLink to="/" style={{ maxHeight: "100px", width: "100px" }} className="nav-brand">
                     <img

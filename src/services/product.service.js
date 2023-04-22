@@ -59,6 +59,16 @@ export class ProductService extends HttpService {
         }
     }
 
+    getProductBySlug = async (slug) => {
+        try {
+            let response = await this.getRequest(`api/v1/product/slug/${slug}`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     getProductsByCategorySlug = async (slug) => {
         try {
             let response = await this.getRequest(`api/v1/product/category/${slug}`);

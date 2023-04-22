@@ -2,3 +2,11 @@ a .card .card-title{
     text-decoration: none;
     color: black;
 }
+
+img.active{
+    border: 2px solid #ffa500 !important;
+}
+
+footer{
+    background-color: #ffa500;
+}

@@ -8,6 +8,8 @@ import BrandListPage from '../pages/front/brand/brand-list.page';
 import BrandDetailPage from '../pages/front/brand/brand-detail.page';
 import CategoryListPage from '../pages/front/category/category-list.page';
 import CategoryDetailPage from '../pages/front/category/category-detail.page';
+import ProductListPage from '../pages/front/product/product-list.page';
+import ProductDetailPage from '../pages/front/product/product-detail.page';
 import HomePage from '../pages/front/home.page';
 import HomePageLayout from '../pages/layout/home-page.layout';
 
@@ -41,6 +43,8 @@ const Routing = () => {
                     <Route path="categories/:slug" element={<CategoryDetailPage />} />
                     <Route path="brands" element={<BrandListPage />} />
                     <Route path="brands/:slug" element={<BrandDetailPage />} />
+                    <Route path="products" element={<ProductListPage />} />
+                    <Route path="products/:slug" element={<ProductDetailPage />} />
                 </Route>
 
                 <Route path="/admin" element={<PermissionRoute component={<AdminLayout />} checkRole="admin" />}  >

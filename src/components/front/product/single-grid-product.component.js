@@ -13,7 +13,7 @@ const SingleGridProductComponent = ({ product }) => {
                     <Card.Body>
                         <Card.Title>{product.title}</Card.Title>
                         <Card.Text as="div">
-                            <h5 className="me-3" style={{ color: "orange" }}>
+                            <h5 className="me-3" style={{ color: "#ffa500" }}>
                                 NPR. {product.afterDiscount}
                             </h5>
                             {
