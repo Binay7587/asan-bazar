@@ -1,17 +1,36 @@
 import { Container, Navbar, Nav, Form, Row, Col } from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
-import { FaFacebook, FaShoppingCart, FaTwitter } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 import "../../../assets/css/home.css"
 import { useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import categoryService from "../../../services/category.service";
 
 const HomeMenu = () => {
+    const [categoryList, setCategoryList] = useState({});
+
+    let LoadCategoryList = useCallback(async () => {
+        try {
+            let response = await categoryService.getFeaturedCategories();
+            if (response.status) {
+                setCategoryList(response.result);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
+    useEffect(() => {
+        LoadCategoryList();
+    }, [LoadCategoryList])
+
     let user = useSelector((rootUser) => {
         return rootUser.User.loggedInUser;
     });
 
     return (<>
-        <Navbar variant="dark" style={{backgroundColor: "#ffa500"}}>
+        <Navbar variant="light">
             <Container>
                 <NavLink to="/" style={{ maxHeight: "100px", width: "100px" }} className="nav-brand">
                     <img
@@ -58,6 +77,25 @@ const HomeMenu = () => {
                 </Nav>
             </Container >
         </Navbar >
+        <div className="text-white" style={{ backgroundColor: "#ffa500", overflow: "hidden" }}>
+            <Container>
+                <Row>
+                    <Col>
+                        <ul className="nav">
+                            {
+                                categoryList && categoryList.length > 0 ?
+                                    categoryList.map((c, index) => {
+                                        return <li className="nav-item" key={index}>
+                                        <NavLink to="/" className={"nav-link text-white"}>{c.title}</NavLink>
+                                    </li>
+                                    })
+                                    : ""
+                            }
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     </>)
 }
 

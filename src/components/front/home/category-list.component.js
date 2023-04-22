@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import categoryService from "../../../services/category.service";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import noCategoryImage from "../../../assets/images/no-image.jpg";
 import { NavLink } from "react-router-dom";
 
