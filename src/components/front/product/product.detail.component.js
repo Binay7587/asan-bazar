@@ -38,7 +38,7 @@ const ProductDetailComponent = ({ product }) => {
                         }
                     </Row>
                 </Col>
-                <Col md={6}>
+                <Col md={6} style={{paddingLeft: "2rem"}}>
                     <Row>
                         <Col>
                             <h2>{product.title}</h2>

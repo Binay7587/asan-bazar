@@ -33,15 +33,15 @@ const CategoryListSection = () => {
                 {
                     categoryList && categoryList.length > 0 ? categoryList.map((c, index) => {
                         return <Col sm={12} md={6} lg={3} className="mb-3" key={index}>
-                        <NavLink to={`/categories/${c.slug}`}>
-                            <Card style={{ cursor: "pointer" }}>
-                                <Card.Img variant="top" src={c?.categoryImage ? `${process.env.REACT_APP_BASE_URL}/images${c.categoryImage}` : noCategoryImage} alt="product" />
-                                <Card.Body>
-                                    <Card.Title>{c.title}</Card.Title>
-                                </Card.Body>
-                            </Card>
-                        </NavLink>
-                    </Col >
+                            <NavLink to={`/categories/${c.slug}`}>
+                                <Card style={{ cursor: "pointer", height: "310px" }}>
+                                    <Card.Img variant="top" src={c?.categoryImage ? `${process.env.REACT_APP_BASE_URL}/images${c.categoryImage}` : noCategoryImage} alt="product" style={{ objectFit: "cover", minHeight: "250px", maxHeight: "250px" }} />
+                                    <Card.Body style={{ height: "50%", overflow: "hidden" }}>
+                                        <Card.Title>{c.title}</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </NavLink>
+                        </Col >
                     }) : <Col>No Categories</Col>
                 }
             </Row>

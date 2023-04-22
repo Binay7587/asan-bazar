@@ -86,7 +86,7 @@ const HomeMenu = () => {
                                 categoryList && categoryList.length > 0 ?
                                     categoryList.map((c, index) => {
                                         return <li className="nav-item" key={index}>
-                                        <NavLink to="/" className={"nav-link text-white"}>{c.title}</NavLink>
+                                        <NavLink to={`/categories/${c.slug}`} className={"nav-link text-white"}>{c.title}</NavLink>
                                     </li>
                                     })
                                     : ""
