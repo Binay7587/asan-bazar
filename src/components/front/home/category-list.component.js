@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import categoryService from "../../../services/category.service";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import noCategoryImage from "../../../assets/images/no-image.jpg";
+import { NavLink } from "react-router-dom";
 
 const CategoryListSection = () => {
     let [categoryList, setCategoryList] = useState([]);
@@ -30,16 +31,17 @@ const CategoryListSection = () => {
             </Row>
             <Row>
                 {
-                    categoryList && categoryList.length > 0 ? categoryList.map((category, index) => {
-                        return (<Col sm={12} md={6} lg={3} className="mb-3" key={index}>
-                            <Card>
-                                <Card.Img variant="top" src={category?.categoryImage ? `${process.env.REACT_APP_BASE_URL}/images${category.categoryImage}` : noCategoryImage} alt="product" />
+                    categoryList && categoryList.length > 0 ? categoryList.map((c, index) => {
+                        return <Col sm={12} md={6} lg={3} className="mb-3" key={index}>
+                        <NavLink to={`/categories/${c.slug}`}>
+                            <Card style={{ cursor: "pointer" }}>
+                                <Card.Img variant="top" src={c?.categoryImage ? `${process.env.REACT_APP_BASE_URL}/images${c.categoryImage}` : noCategoryImage} alt="product" />
                                 <Card.Body>
-                                    <Card.Title>{category.title}</Card.Title>
-                                    <Button variant="success" size="sm">View More</Button>
+                                    <Card.Title>{c.title}</Card.Title>
                                 </Card.Body>
                             </Card>
-                        </Col >)
+                        </NavLink>
+                    </Col >
                     }) : <Col>No Categories</Col>
                 }
             </Row>
