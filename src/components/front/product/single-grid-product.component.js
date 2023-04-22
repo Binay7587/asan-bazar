@@ -1,45 +1,30 @@
-import { Col, Button, Card, Badge } from "react-bootstrap";
-import Rating from "react-rating";
+import { Col, Card, Badge } from "react-bootstrap";
 
-import brand1 from '../../../assets/images/brands/brand1.png';
-import starGrey from '../../../assets/images/star-grey.png';
-import starYellow from '../../../assets/images/star-yellow.png';
+import noProductImage from '../../../assets/images/noProductImage.png';
+import { NavLink } from "react-router-dom";
 
-const SingleGridProductComponent = () => {
+const SingleGridProductComponent = ({ product }) => {
+
     return (
         <Col sm={12} md={6} lg={3} className="mb-3">
-            <Card>
-                <Card.Img variant="top" src={brand1} alt="product" />
-                <Card.Body>
-                    <Card.Title>iPhone 13 Pro Max</Card.Title>
-                    <Card.Text as="div">
-                        <div className="d-flex justify-content-between">
-                            <span className="pull-left">
-                                <Rating
-                                    placeholderRating={3}
-                                    emptySymbol={<img src={starGrey} className="icon" alt="empty-symbol" />}
-                                    placeholderSymbol={<img src={starGrey} className="icon" alt="placeholder-symbol" />}
-                                    fullSymbol={<img src={starYellow} className="icon" alt="full-symbol" />}
-                                />
-                            </span>
-                            <span className="pull-right">
-                                <span className="me-3">
-                                    Npr. 2,75,000
-                                </span>
-                                <span className="text-danger">
-                                    <del>Npr. 3,00,000</del>
-                                </span>
-                            </span>
-                        </div>
-                        <div className="mt-2 mb-2">
-                            <Badge bg="warning" className="me-2">
-                                5% off
-                            </Badge>
-                        </div>
-                    </Card.Text>
-                    <Button variant="success" size="sm">Add to Cart</Button>
-                </Card.Body>
-            </Card>
+            <NavLink to={`/products/${product.slug}`}>
+                <Card>
+                    <Card.Img variant="top" src={product.productImage && product.productImage.length > 0 ? process.env.REACT_APP_BASE_URL + '/images' + product.productImage[0] : noProductImage} alt="product" />
+                    <Card.Body>
+                        <Card.Title>{product.title}</Card.Title>
+                        <Card.Text as="div">
+                            <h5 className="me-3" style={{ color: "orange" }}>
+                                NPR. {product.afterDiscount}
+                            </h5>
+                            {
+                                product.discount > 0 && <><span className="text-danger">
+                                    <del>NPR. {product.price}</del>
+                                </span> <Badge bg="success">{product.discount} % off</Badge>  </>
+                            }
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </NavLink>
         </Col >
     )
 }

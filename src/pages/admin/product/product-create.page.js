@@ -10,7 +10,7 @@ const AdminProductCreate = () => {
         description: "",
         categoryId: null,
         price: "",
-        discount: "",
+        discount: 0,
         featured: false,
         brand: null,
         sellerId: null,

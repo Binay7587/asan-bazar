@@ -33,7 +33,7 @@ export class CategoryService extends HttpService {
 
     getActiveCategories = async () => {
         try {
-            let response = await this.getRequest(`api/v1/category/active`, { login: true });
+            let response = await this.getRequest(`api/v1/category/active`);
             return response;
         } catch (err) {
             throw err;

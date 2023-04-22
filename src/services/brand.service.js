@@ -33,7 +33,7 @@ export class BrandService extends HttpService {
 
     getActiveBrands = async () => {
         try {
-            let response = await this.getRequest(`api/v1/brand/active`, { login: true });
+            let response = await this.getRequest(`api/v1/brand/active`);
             return response;
         } catch (err) {
             throw err;

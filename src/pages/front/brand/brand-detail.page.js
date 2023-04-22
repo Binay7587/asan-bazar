@@ -44,7 +44,7 @@ const BrandDetailPage = () => {
                             products && products.length > 0 ? <>
                                 {
                                     products.map((p, index) => (
-                                        <SingleGridProductComponent key={index} />
+                                        <SingleGridProductComponent product={p} key={index} />
                                     ))
                                 }
                             </> : <p className="text-center">Product doesn't exists in this brand.</p>

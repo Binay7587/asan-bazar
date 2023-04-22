@@ -33,7 +33,7 @@ export class ProductService extends HttpService {
 
     getActiveProducts = async () => {
         try {
-            let response = await this.getRequest(`api/v1/product/active`, { login: true });
+            let response = await this.getRequest(`api/v1/product/active`);
             return response;
         } catch (err) {
             throw err;

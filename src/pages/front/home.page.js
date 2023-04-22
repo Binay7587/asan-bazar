@@ -1,5 +1,4 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
-import SingleGridProductComponent from "../../components/front/product/single-grid-product.component";
 
 import brand1 from '../../assets/images/brands/brand1.png';
 import brand2 from '../../assets/images/brands/brand2.png';
@@ -10,6 +9,7 @@ import brand6 from '../../assets/images/brands/brand6.jpg';
 import { NavLink } from "react-router-dom";
 import HomePageBanner from "../../components/front/home/banner.component";
 import CategoryListSection from "../../components/front/home/category-list.component";
+import LatestProductsComponent from "../../components/front/home/latest-products.component";
 
 const HomePage = () => {
 
@@ -70,24 +70,7 @@ const HomePage = () => {
             </Row>
         </Container>
 
-        <Container className="my-5" fluid>
-            <Row>
-                <Col>
-                    <h4>Latest Products</h4>
-                </Col>
-            </Row>
-            <Row>
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-                <SingleGridProductComponent />
-            </Row>
-        </Container>
+        <LatestProductsComponent />
     </>)
 }
 
