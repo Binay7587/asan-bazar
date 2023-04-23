@@ -58,6 +58,7 @@ const ProductDetailComponent = ({ product }) => {
                             <h2>{product.title}</h2>
                         </Col>
                     </Row>
+                    <hr />
                     <Row>
                         <Col>
                             <h5 style={{ color: "#ffa500" }}>
