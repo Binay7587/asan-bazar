@@ -1,4 +1,4 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap"
+import { Card, Col, Container, Row } from "react-bootstrap"
 import categoryService from "../../../services/category.service"
 import noCategoryImage from "../../../assets/images/no-image.jpg"
 import { useCallback, useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const CategoryListPage = () => {
     const [category, setCategory] = useState({});
-    const LoadCategoryList = useCallback(async () => {
+    const loadCategoryList = useCallback(async () => {
         try {
             let response = await categoryService.getActiveCategories();
             if (response.status) {
@@ -19,8 +19,8 @@ const CategoryListPage = () => {
     }, []);
 
     useEffect(() => {
-        LoadCategoryList()
-    }, []);
+        loadCategoryList()
+    }, [loadCategoryList]);
 
     return (
         <Container className="my-5">

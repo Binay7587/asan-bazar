@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const BrandListPage = () => {
     const [brand, setBrand] = useState({});
-    const LoadBrandList = useCallback(async () => {
+    const loadBrandList = useCallback(async () => {
         try {
             let response = await brandService.getActiveBrands();
             if (response.status) {
@@ -19,8 +19,8 @@ const BrandListPage = () => {
     }, []);
 
     useEffect(() => {
-        LoadBrandList()
-    }, []);
+        loadBrandList()
+    }, [loadBrandList]);
 
     return (
         <Container className="my-5">
@@ -35,9 +35,9 @@ const BrandListPage = () => {
                     brand && brand.length > 0 ? brand.map((c, index) => {
                         return <Col sm={12} md={6} lg={3} className="mb-3" key={index}>
                             <NavLink to={`/brands/${c.slug}`}>
-                                <Card style={{ cursor: "pointer" }}>
-                                    <Card.Img variant="top" src={c?.brandImage ? `${process.env.REACT_APP_BASE_URL}/images${c.brandImage}` : noBrandImage} alt={brand + index} />
-                                    <Card.Body>
+                                <Card style={{ cursor: "pointer", height: "310px" }}>
+                                    <Card.Img variant="top" src={c?.brandImage ? `${process.env.REACT_APP_BASE_URL}/images${c.brandImage}` : noBrandImage} alt={brand + index} style={{ objectFit: "cover", minHeight: "250px", maxHeight: "250px" }} />
+                                    <Card.Body style={{ height: "50%", overflow: "hidden" }}>
                                         <Card.Title>{c.title}</Card.Title>
                                     </Card.Body>
                                 </Card>
