@@ -19,6 +19,7 @@ import PermissionRoute from './permissionRoutes';
 import { AdminBannerCreate, AdminBrandEdit, AdminBannerList, AdminBrandCreate, AdminBannerEdit, AdminBrandList, AdminCategoryList, AdminCategoryCreate, AdminCategoryEdit, AdminUserList, AdminUserCreate, AdminUserEdit, AdminProductList, AdminProductCreate, AdminProductEdit, } from '../pages/admin';
 import { useDispatch } from 'react-redux';
 import { getLoggedInUser } from '../reducers/user.slicer';
+import { updateCart } from '../reducers/cart.slicer';
 import { useEffect } from 'react';
 
 const Routing = () => {
@@ -28,7 +29,8 @@ const Routing = () => {
         if (token) {
             dispatch(getLoggedInUser());
         }
-    }, [])
+        dispatch(updateCart());
+    }, [dispatch])
 
     return (<>
         <ToastContainer />
@@ -38,7 +40,7 @@ const Routing = () => {
                     <Route index element={<HomePage />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
-                    
+
                     <Route path="categories" element={<CategoryListPage />} />
                     <Route path="categories/:slug" element={<CategoryDetailPage />} />
                     <Route path="brands" element={<BrandListPage />} />

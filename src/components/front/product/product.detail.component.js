@@ -2,13 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Badge, Image, Form } from 'react-bootstrap';
 import noProductImage from '../../../assets/images/noProductImage.png';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCart } from '../../../reducers/cart.slicer';
+import { toast } from 'react-toastify';
 
 const ProductDetailComponent = ({ product }) => {
     const [activeImage, setActiveImage] = useState();
+    const [quantity, setQuantity] = useState(0);
 
     const handleImageClick = (image) => {
         setActiveImage(image);
     };
+
+    const dispatch = useDispatch();
+    const addToCart = (e) => {
+        e.preventDefault();
+        dispatch(setCart({
+            quantity: Number(quantity),
+            product: product._id
+        }));
+        toast.success("Product added to cart.");
+    }
 
     useEffect(() => {
         if (product.productImage && product.productImage.length > 0) {
@@ -38,7 +52,7 @@ const ProductDetailComponent = ({ product }) => {
                         }
                     </Row>
                 </Col>
-                <Col md={6} style={{paddingLeft: "2rem"}}>
+                <Col md={6} style={{ paddingLeft: "2rem" }}>
                     <Row>
                         <Col>
                             <h2>{product.title}</h2>
@@ -74,7 +88,9 @@ const ProductDetailComponent = ({ product }) => {
                     </Row>
                     <Row>
                         <Col>
-                            <strong>Brand:</strong> {product.brand.title}
+                            <strong>Brand:</strong> <NavLink to={`/brands/${product.brand.slug}`} className="ms-2">
+                                <Badge bg="primary">{product.brand.title}</Badge>
+                            </NavLink>
                         </Col>
                     </Row>
                     <Row>
@@ -92,15 +108,17 @@ const ProductDetailComponent = ({ product }) => {
                             <Form.Group as={Row} className="mb-3">
                                 <Col sm={3}>
                                     <Form.Control
-                                        name={"qty"}
+                                        name={"quantity"}
                                         type="number"
+                                        value={quantity}
+                                        onChange={(e) => setQuantity(e.target.value)}
                                         min={0}
                                         size='sm'
                                         placeholder='Qty'
                                     />
                                 </Col>
                                 <Col sm={9}>
-                                    <Button variant="warning" size="sm">Add to Cart</Button>
+                                    <Button variant="warning" size="sm" onClick={quantity > 0 ? addToCart : null}>Add to Cart</Button>
                                 </Col>
                             </Form.Group>
                         </Col>
@@ -114,7 +132,7 @@ const ProductDetailComponent = ({ product }) => {
                     </Row>
                     <Row>
                         <Col className={"mt-3"} style={{ backgroundColor: "#fff" }}>
-                            <p className='px-2 py-2' dangerouslySetInnerHTML={{__html: product.description}}></p>
+                            <p className='px-2 py-2' dangerouslySetInnerHTML={{ __html: product.description }}></p>
                         </Col>
                     </Row>
                 </Col>

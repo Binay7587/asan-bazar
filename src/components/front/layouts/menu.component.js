@@ -1,4 +1,4 @@
-import { Container, Navbar, Nav, Form, Row, Col } from "react-bootstrap";
+import { Container, Navbar, Nav, Form, Row, Col, Badge } from "react-bootstrap";
 import logo from '../../../assets/images/logo.svg';
 import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
@@ -29,6 +29,14 @@ const HomeMenu = () => {
         return rootUser.User.loggedInUser;
     });
 
+    let cartQty = useSelector((rootStore) => {
+        let cart = rootStore.Cart.cart;
+        let quantity = 0;
+        cart.map((item) => quantity += Number(item.quantity));
+
+        return quantity;
+    });
+
     return (<>
         <Navbar variant="light">
             <Container>
@@ -50,6 +58,7 @@ const HomeMenu = () => {
                 <Form className="d-flex">
                     <Form.Control
                         type="search"
+                        name="search"
                         placeholder="Search"
                         className="me-2"
                         aria-label="Search"
@@ -58,7 +67,9 @@ const HomeMenu = () => {
                 </Form>
                 <Nav>
                     <NavLink to="/cart" className={"nav-link"}>
-                        <FaShoppingCart size={20} />
+                        <div style={{ position: 'relative' }}>
+                            <FaShoppingCart size={20} /> Cart <Badge pill bg="warning" style={{ position: 'absolute', top: '-10px', right: '-10px' }}>{cartQty}</Badge>
+                        </div>
                     </NavLink>
                     {
                         user ? <>
@@ -86,8 +97,8 @@ const HomeMenu = () => {
                                 categoryList && categoryList.length > 0 ?
                                     categoryList.map((c, index) => {
                                         return <li className="nav-item" key={index}>
-                                        <NavLink to={`/categories/${c.slug}`} className={"nav-link text-white"}>{c.title}</NavLink>
-                                    </li>
+                                            <NavLink to={`/categories/${c.slug}`} className={"nav-link text-white"}>{c.title}</NavLink>
+                                        </li>
                                     })
                                     : ""
                             }
