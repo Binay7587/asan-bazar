@@ -9,7 +9,7 @@ body {
 }
 
 .circle {
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 
 .profile-md-img {

@@ -19,7 +19,7 @@ const ProductDetailComponent = ({ product }) => {
         e.preventDefault();
         dispatch(setCart({
             quantity: Number(quantity),
-            product: product._id
+            productId: product._id
         }));
         toast.success("Product added to cart.");
     }

@@ -1,34 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const CartSlicer = createSlice({
-    name: "cart",
-    initialState: {
-        cart: []
-    },
-    reducers: {
-        setCart: (state, action) => {
-            let cart = JSON.parse(localStorage.getItem(process.env.REACT_APP_CART_KEY)) || [];
+const initialState = {
+  cart: []
+};
 
-            const productIndex = cart.findIndex(item => item.product === action.payload.product);
-            if (productIndex !== -1) {
-                cart[productIndex].quantity += parseInt(action.payload.quantity);
-            } else {
-                cart.push(action.payload);
-            }
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    setCart: (state, action) => {
+      const { productId, quantity } = action.payload;
+      const cart = state.cart.slice();
+      let found = false;
 
-            state.cart = cart;
-            localStorage.setItem(process.env.REACT_APP_CART_KEY, JSON.stringify(cart));
-
-        },
-        updateCart: (state, action) => {
-            let cart = JSON.parse(localStorage.getItem(process.env.REACT_APP_CART_KEY)) || [];
-            state.cart = cart;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].productId === productId) {
+          cart[i].quantity = Number(quantity);
+          found = true;
+          break;
         }
-    },
-    extraReducers: {
+      }
 
-    }
+      if (!found) {
+        cart.push(action.payload);
+      }
+
+      state.cart = cart;
+      localStorage.setItem(process.env.REACT_APP_CART_KEY, JSON.stringify(cart));
+    },
+    updateCart: (state) => {
+      const cart = JSON.parse(localStorage.getItem(process.env.REACT_APP_CART_KEY)) || [];
+      state.cart = cart;
+    },
+  },
+  extraReducers: {},
 });
 
-export const { setCart, updateCart } = CartSlicer.actions;
-export default CartSlicer.reducer;
+export const { setCart, updateCart } = cartSlice.actions;
+export default cartSlice.reducer;

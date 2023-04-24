@@ -18,7 +18,6 @@ const ProductDetailPage = () => {
             setLoading(false);
         } catch (err) {
             setLoading(false);
-            console.log(err);
             throw err;
         }
     }, [slug])
