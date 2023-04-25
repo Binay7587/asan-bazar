@@ -1,0 +1,22 @@
+a .card .card-title{
+    text-decoration: none;
+    color: black;
+}
+
+img.active{
+    border: 2px solid #ffa500 !important;
+}
+
+footer{
+    background-color: #ffa500;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #ffedcc;
+    text-decoration: none;
+}
