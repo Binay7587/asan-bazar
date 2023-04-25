@@ -26,7 +26,7 @@ const ProductDetailComponent = ({ product }) => {
 
     useEffect(() => {
         if (product.productImage && product.productImage.length > 0) {
-            setActiveImage(process.env.REACT_APP_BASE_URL + '/images' + product.productImage[0]);
+            setActiveImage(import.meta.env.VITE_BASE_URL + '/images' + product.productImage[0]);
         } else {
             setActiveImage(noProductImage);
         }
@@ -44,7 +44,7 @@ const ProductDetailComponent = ({ product }) => {
                             product.productImage && product.productImage.length > 0 && <div className="mt-3">
                                 {
                                     product.productImage.map((image, index) => {
-                                        image = process.env.REACT_APP_BASE_URL + '/images' + image;
+                                        image = import.meta.env.VITE_BASE_URL + '/images' + image;
                                         return <Image src={image} key={index} alt={`Product Image ${index}`} className={`img-fluid img-thumbnail me-2 ${activeImage === image ? 'active' : ''}`} style={{ width: "100px", cursor: "pointer" }} onClick={() => handleImageClick(image)} />
                                     })
                                 }

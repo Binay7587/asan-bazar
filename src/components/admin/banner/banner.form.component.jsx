@@ -88,7 +88,7 @@ const AdminBannerForm = ({ defaultValue, submitEvent }) => {
                     {
                         typeof (formik.values?.bannerImage) === 'string' ?
                             (
-                                formik.values?.bannerImage ? <Image src={`${process.env.REACT_APP_BASE_URL}/images${formik.values?.bannerImage}`} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
+                                formik.values?.bannerImage ? <Image src={`${import.meta.env.VITE_BASE_URL}/images${formik.values?.bannerImage}`} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
                             )
                             :
                             (

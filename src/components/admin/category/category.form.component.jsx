@@ -126,7 +126,7 @@ const AdminCategoryForm = ({ defaultValue, submitEvent }) => {
                     {
                         typeof (formik.values?.categoryImage) === 'string' ?
                             (
-                                formik.values?.categoryImage ? <Image src={`${process.env.REACT_APP_BASE_URL}/images${formik.values?.categoryImage}`} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
+                                formik.values?.categoryImage ? <Image src={`${import.meta.env.VITE_BASE_URL}/images${formik.values?.categoryImage}`} className="img img-fluid float-end" alt="profile" /> : <Image src={noUserImage} className="img img-fluid float-end" alt="no-image" />
                             )
                             :
                             (

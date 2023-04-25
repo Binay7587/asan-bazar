@@ -404,7 +404,7 @@ const AdminUserForm = ({ defaultValue, submitEvent }) => {
                     {
                         typeof (formik.values?.userImage) === 'string' ?
                             (
-                                formik.values?.userImage ? <Image src={`${process.env.REACT_APP_BASE_URL}/images${formik.values?.userImage}`} className="img img-fluid" alt="profile" /> : <Image src={noImage} className="img img-fluid" alt="no-image" />
+                                formik.values?.userImage ? <Image src={`${import.meta.env.VITE_BASE_URL}/images${formik.values?.userImage}`} className="img img-fluid" alt="profile" /> : <Image src={noImage} className="img img-fluid" alt="no-image" />
                             )
                             :
                             (

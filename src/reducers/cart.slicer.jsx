@@ -26,10 +26,10 @@ const cartSlice = createSlice({
       }
 
       state.cart = cart;
-      localStorage.setItem(process.env.REACT_APP_CART_KEY, JSON.stringify(cart));
+      localStorage.setItem(import.meta.env.VITE_CART_KEY, JSON.stringify(cart));
     },
     updateCart: (state) => {
-      const cart = JSON.parse(localStorage.getItem(process.env.REACT_APP_CART_KEY)) || [];
+      const cart = JSON.parse(localStorage.getItem(import.meta.env.VITE_CART_KEY)) || [];
       state.cart = cart;
     },
   },

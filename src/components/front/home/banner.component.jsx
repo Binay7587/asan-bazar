@@ -44,7 +44,7 @@ const HomePageBanner = () => {
                 {
                     banner && banner.map((item, index) => (
                         <div key={index}>
-                            <Image src={item.bannerImage ? process.env.REACT_APP_BASE_URL + '/images' + item.bannerImage : noImage} className="img img-fluid" alt="banner" />
+                            <Image src={item.bannerImage ? import.meta.env.VITE_BASE_URL + '/images' + item.bannerImage : noImage} className="img img-fluid" alt="banner" />
                         </div>
                     ))
                 }

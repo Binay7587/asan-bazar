@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { setLoggedInUser } from "../reducers/user.slicer";
 
 const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use((response) => {
         let navigate = useNavigate();
 
         dispatch(setLoggedInUser(null))
-        localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+        localStorage.removeItem(import.meta.env.VITE_ACCESSTOKEN_KEY);
         navigate('/login');
         toast.warning('Unauthorized Access!');
     }else if(error.response.status === 403){

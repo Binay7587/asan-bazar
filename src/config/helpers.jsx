@@ -1,5 +1,5 @@
 export function getLoggedInStatus() {
-    let token = localStorage.getItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+    let token = localStorage.getItem(import.meta.env.VITE_ACCESSTOKEN_KEY);
     if (token) {
         return true;
     } else {

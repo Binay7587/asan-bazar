@@ -35,7 +35,7 @@ const CategoryListSection = () => {
                         return <Col sm={12} md={6} lg={3} className="mb-3" key={index}>
                             <NavLink to={`/categories/${c.slug}`}>
                                 <Card style={{ cursor: "pointer", height: "310px" }}>
-                                    <Card.Img variant="top" src={c?.categoryImage ? `${process.env.REACT_APP_BASE_URL}/images${c.categoryImage}` : noCategoryImage} alt="product" style={{ objectFit: "cover", minHeight: "250px", maxHeight: "250px" }} />
+                                    <Card.Img variant="top" src={c?.categoryImage ? `${import.meta.env.VITE_BASE_URL}/images${c.categoryImage}` : noCategoryImage} alt="product" style={{ objectFit: "cover", minHeight: "250px", maxHeight: "250px" }} />
                                     <Card.Body style={{ height: "50%", overflow: "hidden" }}>
                                         <Card.Title>{c.title}</Card.Title>
                                     </Card.Body>

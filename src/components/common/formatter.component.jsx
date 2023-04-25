@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from "../../config/helpers";
 
 export const ImageFormatter = ({ url, noImageUrl = noImage }) => {
     return (<>
-        <img src={url ? process.env.REACT_APP_BASE_URL + '/images' + url : noImageUrl} className="img img-fluid" alt="" />
+        <img src={url ? import.meta.env.VITE_BASE_URL + '/images' + url : noImageUrl} className="img img-fluid" alt="" />
     </>)
 }
 

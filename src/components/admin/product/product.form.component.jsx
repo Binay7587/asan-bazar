@@ -258,7 +258,7 @@ const AdminProductForm = ({ defaultValue, submitEvent }) => {
                 {
                     defaultImage && defaultImage.map((item, index) => (
                         <Col sm={3} md={1} key={index}>
-                            <Image fluid src={`${process.env.REACT_APP_BASE_URL}/images${item}`} thumbnail alt={"Product-" + index} />
+                            <Image fluid src={`${import.meta.env.VITE_BASE_URL}/images${item}`} thumbnail alt={"Product-" + index} />
                         </Col>
                     ))
                 }

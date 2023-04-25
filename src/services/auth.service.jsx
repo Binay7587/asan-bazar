@@ -39,7 +39,7 @@ export class AuthService extends HttpService {
             return response;
         }
         catch (err) {
-            localStorage.removeItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+            localStorage.removeItem(import.meta.env.VITE_ACCESSTOKEN_KEY);
             throw err;
         }
     }

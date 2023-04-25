@@ -32,7 +32,7 @@ const LoginPage = () => {
             try {
                 let response = await authService.loginUser({ ...credentials });
                 if (response.status) {
-                    localStorage.setItem(process.env.REACT_APP_ACCESSTOKEN_KEY, response.result.token);
+                    localStorage.setItem(import.meta.env.VITE_ACCESSTOKEN_KEY, response.result.token);
                     dispatch(setLoggedInUser(response.result.user))
                 }
 

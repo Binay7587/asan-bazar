@@ -8,7 +8,7 @@ class HttpService {
             "Content-Type": config && config.file ? "multipart/form-data" : "application/json",
         };
         if (config.login) {
-            let token = localStorage.getItem(process.env.REACT_APP_ACCESSTOKEN_KEY);
+            let token = localStorage.getItem(import.meta.env.VITE_ACCESSTOKEN_KEY);
             if (!token) {
                 let error = { status: 401, msg: "Unauthorized" };
                 throw error;
