@@ -31,7 +31,7 @@ const PermissionRoute = ({ component, checkRole }) => {
 
     useEffect(() => {
         authCheck();
-    }, [authCheck, user, checkRole, navigate]);
+    }, [authCheck]);
 
     return loading ?
         <div className="preloader" >
