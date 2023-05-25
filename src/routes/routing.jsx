@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminLayout from '../pages/admin/admin.layout';
 import AdminDashboard from '../pages/admin/dashboard.page';
 import AdminProfile from '../pages/admin/profile.page';
@@ -35,7 +35,7 @@ const Routing = () => {
 
     return (<>
         <ToastContainer />
-        <HashRouter>
+        <Router>
             <Routes>
                 <Route path="/" element={<HomePageLayout />}>
                     <Route index element={<HomePage />} />
@@ -86,7 +86,7 @@ const Routing = () => {
 
                 <Route path="*" element={<><h2 className='text-center'>404 Not Found!</h2></>} />
             </Routes>
-        </HashRouter>
+        </Router>
     </>);
 };
 
