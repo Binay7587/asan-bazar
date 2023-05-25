@@ -78,6 +78,16 @@ export class CategoryService extends HttpService {
             throw err;
         }
     }
+
+    getCategoryCount = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/category/count`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 const categoryService = new CategoryService();

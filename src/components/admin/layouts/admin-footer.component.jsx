@@ -7,7 +7,7 @@ const AdminFooter = () => {
         <footer className="py-4 bg-light mt-auto">
             <div className="container-fluid px-4">
                 <div className="d-flex align-items-center justify-content-between small">
-                    <div className="text-muted">Copyright &copy; Your Website {date.getFullYear()}</div>
+                    <div className="text-muted">Copyright &copy; Asan Bazar {date.getFullYear()}</div>
                     <div>
                         <NavLink to="/">Privacy Policy</NavLink>
                         &middot;

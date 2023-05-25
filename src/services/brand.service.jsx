@@ -69,6 +69,16 @@ export class BrandService extends HttpService {
             throw err;
         }
     }
+
+    getBrandCount = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/brand/count`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 const brandService = new BrandService();

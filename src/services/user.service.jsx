@@ -68,6 +68,16 @@ export class UserService extends HttpService {
             throw err;
         }
     }
+
+    getUserCount = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/user/count`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 const userService = new UserService();

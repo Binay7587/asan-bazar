@@ -40,16 +40,15 @@ const HomeMenu = () => {
     return (<>
         <Navbar variant="light">
             <Container>
-                <NavLink to="/" style={{ maxHeight: "100px", width: "100px" }} className="nav-brand">
+                <NavLink to="/" className="nav-brand">
                     <img
                         src={logo}
-                        width="50"
-                        height="50"
+                        height="45"
                         className="d-inline-block align-top circle"
                         alt="React logo"
                     />
                 </NavLink>
-                <Nav className="me-auto">
+                <Nav className="me-auto" style={{marginLeft: "30px"}}> 
                     <NavLink to="/" className={"nav-link"}>Home</NavLink>
                     <NavLink to="/categories" className={"nav-link"}>Categories</NavLink>
                     <NavLink to="/brands" className={"nav-link"}>Brands</NavLink>
