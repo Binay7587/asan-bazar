@@ -26,6 +26,7 @@
     "react-select": "^5.7.2",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.2",
+    "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.10",
     "sweetalert2": "^11.7.3",
