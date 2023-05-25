@@ -18,8 +18,8 @@ const CountWidget = ({ count, icon, color, title }) => {
                 <Card.Header><b>{title}</b></Card.Header>
                 <Card.Body style={widgetStyle}>
                     <Card.Title as="span" style={{ fontSize: "3rem" }}> {icon} </Card.Title>
-                    <Card.Text as="span">
-                        NPR. {count}
+                    <Card.Text as="h4">
+                        {count}
                     </Card.Text>
                 </Card.Body>
             </Card>

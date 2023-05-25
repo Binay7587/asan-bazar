@@ -108,6 +108,16 @@ export class ProductService extends HttpService {
             throw err;
         }
     }
+
+    getProductCount = async () => {
+        try {
+            let response = await this.getRequest(`api/v1/product/count`);
+            return response;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 const productService = new ProductService();
