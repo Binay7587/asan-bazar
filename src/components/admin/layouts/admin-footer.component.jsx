@@ -9,9 +9,9 @@ const AdminFooter = () => {
                 <div className="d-flex align-items-center justify-content-between small">
                     <div className="text-muted">Copyright &copy; Asan Bazar {date.getFullYear()}</div>
                     <div>
-                        <NavLink to="/">Privacy Policy</NavLink>
+                        <NavLink to="/" className="text-muted">Privacy Policy</NavLink>
                         &middot;
-                        <NavLink to="/">Terms &amp; Conditions</NavLink>
+                        <NavLink to="/" className="text-muted">Terms &amp; Conditions</NavLink>
                     </div>
                 </div>
             </div>
