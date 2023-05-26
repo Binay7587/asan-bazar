@@ -68,7 +68,7 @@ const LoginPage = () => {
     return (<>
         <Container>
             <Row className="justify-content-center">
-                <Col lg={5} className="mt-5">
+                <Col lg={5} className="mt-5 mb-5">
                     <Card className="p-4">
                         <h4 className="text-center">Login</h4>
                         <Form onSubmit={formik.handleSubmit} className="mt-5">
