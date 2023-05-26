@@ -5,7 +5,7 @@ import visaLogo from "../../../assets/images/visa.png";
 
 const FooterComponent = () => {
     return (<>
-        <footer className="text-white py-3">
+        <footer className="text-white py-5">
             <Container>
                 <Row>
                     <Col lg={3} md={6}>

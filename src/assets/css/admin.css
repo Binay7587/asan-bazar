@@ -2276,9 +2276,9 @@ progress {
 .dataTable-input:focus {
   color: #212529;
   background-color: #fff;
-  border-color: #86b7fe;
+  border-color: #FFA500 !important;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.02rem #ffc966 !important;
 }
 .form-control::-webkit-date-and-time-value,
 .dataTable-input::-webkit-date-and-time-value {
@@ -2303,7 +2303,7 @@ progress {
 .dataTable-input:disabled,
 .form-control[readonly],
 [readonly].dataTable-input {
-  background-color: #e9ecef;
+  background-color: #FFA500 !important;
   opacity: 1;
 }
 .form-control::-webkit-file-upload-button,
@@ -2523,9 +2523,9 @@ textarea.form-control-lg {
 }
 .form-select:focus,
 .dataTable-selector:focus {
-  border-color: #86b7fe;
+  border-color: #FFA500 !important;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.02rem #ffc966 !important;
 }
 .form-select[multiple],
 [multiple].dataTable-selector,
@@ -5193,6 +5193,9 @@ fieldset:disabled .btn {
 .breadcrumb-item.active {
   color: #6c757d;
 }
+.breadcrumb-item a.active {
+    color: #FFA500 !important;
+  }
 
 .pagination,
 .dataTable-pagination ul {
