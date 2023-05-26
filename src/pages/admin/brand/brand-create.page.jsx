@@ -15,6 +15,7 @@ const AdminBrandCreate = () => {
     const submitEvent = async (values) => {
         try {
             let response = await brandService.createBrand(values);
+            console.log(response);
             if (response.status) {
                 navigate("/admin/brand");
                 toast.success(response.msg);
